@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "id": "rootsclassic",
+  "version": "${version}",
+
+  "name": "Roots Classic",
+  "description": "Classic port of Roots, the Druidic Magic Mod",
+  "authors": [
+    "Elucent",
+    "Lothrazar",
+    "Mrbysco",
+    "ZestyBlaze"
+  ],
+  "contact": {
+    "homepage": "",
+    "sources": "",
+    "issues": ""
+  },
+
+  "license": "MIT",
+  "icon": "assets/modid/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "elucent.rootsclassic.Roots"
+    ],
+    "client": [
+      "elucent.rootsclassic.RootsClient"
+    ],
+    "cardinal-components": [
+      "elucent.rootsclassic.capability.RootsCapabilityManager"
+    ]
+  },
+  "mixins": [
+    "modid.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.14.11",
+    "fabric-api": "*",
+    "minecraft": "~1.19.2",
+    "java": ">=17"
+  },
+  "custom": {
+    "cardinal-components": [
+      "rootsclassic:manacapability"
+    ]
+  },
+  "accessWidener": "rootsclassic.accessWidener"
+}

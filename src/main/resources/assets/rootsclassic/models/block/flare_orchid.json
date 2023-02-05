@@ -1,0 +1,8 @@
+{
+    "parent": "block/cross",
+		"render_type": "minecraft:cutout",
+    "textures": {
+        "cross": "rootsclassic:blocks/flare_orchid",
+        "particle": "rootsclassic:blocks/flare_orchid"
+    }
+}
