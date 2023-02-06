@@ -3,6 +3,7 @@ package elucent.rootsclassic;
 import com.mojang.logging.LogUtils;
 import elucent.rootsclassic.component.ComponentRegistry;
 import elucent.rootsclassic.config.RootsConfig;
+import elucent.rootsclassic.recipe.RootsReloadManager;
 import elucent.rootsclassic.registry.ParticleRegistry;
 import elucent.rootsclassic.registry.RootsEntities;
 import elucent.rootsclassic.registry.RootsRecipes;
@@ -35,6 +36,7 @@ public class Roots implements ModInitializer {
 		RootsRecipes.RECIPE_SERIALIZERS.register();
 		RootsRecipes.RECIPE_TYPES.register();
 		ParticleRegistry.PARTICLE_TYPES.register();
+		RootsReloadManager.onAddReloadListeners();
 		RootsEntities.registerEntityAttributes();
 		setup();
 	}
