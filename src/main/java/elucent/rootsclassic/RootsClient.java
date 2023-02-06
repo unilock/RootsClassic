@@ -15,6 +15,10 @@ import net.minecraft.world.inventory.InventoryMenu;
 public class RootsClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
+        ClientHandler.onClientSetup();
+        ClientHandler.registerEntityRenders();
+        ClientHandler.registerLayerDefinitions();
+        ClientHandler.registerItemColors();
         ClientHandler.registerParticleFactories();
         ResearchManager.onRecipesUpdated();
     }
