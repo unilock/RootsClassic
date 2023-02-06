@@ -1,12 +1,13 @@
 package elucent.rootsclassic.client;
 
 import elucent.rootsclassic.Const;
+import elucent.rootsclassic.client.model.SylvanArmorModel;
+import elucent.rootsclassic.client.model.WildwoodArmorModel;
 import elucent.rootsclassic.client.particles.*;
 import elucent.rootsclassic.client.renderer.entity.AcceleratorRenderer;
 import elucent.rootsclassic.client.renderer.entity.PhantomSkeletonRenderer;
 import elucent.rootsclassic.component.ComponentBase;
 import elucent.rootsclassic.component.ComponentBaseRegistry;
-import elucent.rootsclassic.entity.skeleton.PhantomSkeletonEntity;
 import elucent.rootsclassic.item.CrystalStaffItem;
 import elucent.rootsclassic.item.StaffItem;
 import elucent.rootsclassic.registry.ParticleRegistry;
@@ -14,18 +15,27 @@ import elucent.rootsclassic.registry.RootsEntities;
 import elucent.rootsclassic.registry.RootsRegistry;
 import elucent.rootsclassic.util.RootsUtil;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.inventory.InventoryMenu;
 
 public class ClientHandler {
     public static final ModelLayerLocation SYLVAN_ARMOR = new ModelLayerLocation(new ResourceLocation(Const.MODID, "main"), "sylvan_armor");
     public static final ModelLayerLocation WILDWOOD_ARMOR = new ModelLayerLocation(new ResourceLocation(Const.MODID, "main"), "wildwood_armor");
+    private static WildwoodArmorModel wildHeadModel;
+    private static WildwoodArmorModel wildChestModel;
+    private static WildwoodArmorModel wildLegModel;
+    private static WildwoodArmorModel wildBootModel;
+    private static final ResourceLocation texture = new ResourceLocation(Const.MODID, "textures/models/armor/wildwood.png");
 
     public static void onClientSetup() {
         ItemProperties.register(RootsRegistry.STAFF.get(), new ResourceLocation("imbued"), ((itemStack, clientLevel, livingEntity, i) ->
@@ -40,7 +50,51 @@ public class ClientHandler {
     }
 
     public static void registerLayerDefinitions() {
+        EntityModelLayerRegistry.registerModelLayer(SYLVAN_ARMOR, SylvanArmorModel::createArmorDefinition);
+        EntityModelLayerRegistry.registerModelLayer(WILDWOOD_ARMOR, WildwoodArmorModel::createArmorDefinition);
 
+        ArmorRenderer.register((matrices, vertexConsumers, stack, entity, slot, light, contextModel) -> {
+            if(wildHeadModel == null) {
+                wildHeadModel = new WildwoodArmorModel(Minecraft.getInstance().getEntityModels().bakeLayer(WILDWOOD_ARMOR), slot);
+            }
+
+            contextModel.copyPropertiesTo(wildHeadModel);
+            wildHeadModel.setAllVisible(false);
+            wildHeadModel.head.visible = slot == EquipmentSlot.HEAD;
+            ArmorRenderer.renderPart(matrices, vertexConsumers, light, stack, wildHeadModel, texture);
+        }, RootsRegistry.WILDWOOD_MASK.get());
+
+        ArmorRenderer.register((matrices, vertexConsumers, stack, entity, slot, light, contextModel) -> {
+            if(wildChestModel == null) {
+                wildChestModel = new WildwoodArmorModel(Minecraft.getInstance().getEntityModels().bakeLayer(WILDWOOD_ARMOR), slot);
+            }
+            contextModel.copyPropertiesTo(wildChestModel);
+            wildChestModel.setAllVisible(false);
+            wildChestModel.body.visible = slot == EquipmentSlot.CHEST;
+            ArmorRenderer.renderPart(matrices, vertexConsumers, light, stack, wildChestModel, texture);
+        }, RootsRegistry.WILDWOOD_PLATE.get());
+
+        ArmorRenderer.register((matrices, vertexConsumers, stack, entity, slot, light, contextModel) -> {
+            if(wildLegModel == null) {
+                wildLegModel = new WildwoodArmorModel(Minecraft.getInstance().getEntityModels().bakeLayer(WILDWOOD_ARMOR), slot);
+            }
+            contextModel.copyPropertiesTo(wildLegModel);
+            wildLegModel.setAllVisible(false);
+            wildLegModel.leftLeg.visible = slot == EquipmentSlot.LEGS;
+            wildLegModel.rightLeg.visible = slot == EquipmentSlot.LEGS;
+            ArmorRenderer.renderPart(matrices, vertexConsumers, light, stack, wildLegModel, texture);
+        }, RootsRegistry.WILDWOOD_LEGGINGS.get());
+
+        ArmorRenderer.register((matrices, vertexConsumers, stack, entity, slot, light, contextModel) -> {
+            if(wildBootModel == null) {
+                wildBootModel = new WildwoodArmorModel(Minecraft.getInstance().getEntityModels().bakeLayer(WILDWOOD_ARMOR), slot);
+            }
+            contextModel.copyPropertiesTo(wildBootModel);
+            wildBootModel.setAllVisible(false);
+            wildBootModel.leftFoot.visible = slot == EquipmentSlot.FEET;
+            wildBootModel.rightFoot.visible = slot == EquipmentSlot.FEET;
+            ArmorRenderer.renderPart(matrices, vertexConsumers, light, stack, wildBootModel, texture);
+        }, RootsRegistry.WILDWOOD_BOOTS.get());
     }
 
     public static void registerItemColors() {
