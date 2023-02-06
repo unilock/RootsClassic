@@ -5,6 +5,7 @@ import elucent.rootsclassic.component.ComponentRegistry;
 import elucent.rootsclassic.config.RootsConfig;
 import elucent.rootsclassic.registry.ParticleRegistry;
 import elucent.rootsclassic.registry.RootsEntities;
+import elucent.rootsclassic.registry.RootsRecipes;
 import elucent.rootsclassic.registry.RootsRegistry;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
@@ -31,6 +32,8 @@ public class Roots implements ModInitializer {
 		RootsRegistry.BLOCK_ENTITY_TYPES.register();
 		RootsEntities.ENTITY_TYPES.register();
 		ComponentRegistry.COMPONENTS.register();
+		RootsRecipes.RECIPE_SERIALIZERS.register();
+		RootsRecipes.RECIPE_TYPES.register();
 		ParticleRegistry.PARTICLE_TYPES.register();
 		RootsEntities.registerEntityAttributes();
 		setup();
