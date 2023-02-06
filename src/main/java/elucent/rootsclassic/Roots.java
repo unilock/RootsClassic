@@ -26,13 +26,14 @@ public class Roots implements ModInitializer {
 		ModLoadingContext.registerConfig(Const.MODID, ModConfig.Type.CLIENT, RootsConfig.clientSpec);
 		ModLoadingContext.registerConfig(Const.MODID, ModConfig.Type.COMMON, RootsConfig.commonSpec);
 		RootsConfig.registerEvents();
-		setup();
 		RootsRegistry.BLOCKS.register();
 		RootsRegistry.ITEMS.register();
 		RootsRegistry.BLOCK_ENTITY_TYPES.register();
 		RootsEntities.ENTITY_TYPES.register();
 		ComponentRegistry.COMPONENTS.register();
 		ParticleRegistry.PARTICLE_TYPES.register();
+		RootsEntities.registerEntityAttributes();
+		setup();
 	}
 
 	private void setup() {
