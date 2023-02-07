@@ -1,5 +1,7 @@
 package elucent.rootsclassic.research;
 
+import elucent.rootsclassic.recipe.ComponentRecipe;
+import elucent.rootsclassic.ritual.RitualBase;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.item.ItemStack;
 
@@ -7,8 +9,8 @@ import java.util.ArrayList;
 
 public class ResearchPage {
     public ArrayList<ItemStack> craftingRecipe = new ArrayList<>();
-    //public ComponentRecipe mortarRecipe = null;
-    //public RitualBase altarRecipe = null;
+    public ComponentRecipe mortarRecipe = null;
+    public RitualBase altarRecipe = null;
     public ArrayList<ItemStack> smeltingRecipe = new ArrayList<>();
     public EnumPageType recipe = EnumPageType.TYPE_NULL;
     public ItemStack displayItem = null;
@@ -59,7 +61,6 @@ public class ResearchPage {
         return this;
     }
 
-    /*
     public ResearchPage addMortarRecipe(ComponentRecipe component) {
         recipe = EnumPageType.TYPE_MORTAR;
         mortarRecipe = component;
@@ -71,6 +72,4 @@ public class ResearchPage {
         altarRecipe = ritual;
         return this;
     }
-
-     */
 }

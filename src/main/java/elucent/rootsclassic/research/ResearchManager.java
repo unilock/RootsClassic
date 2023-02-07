@@ -1,7 +1,18 @@
 package elucent.rootsclassic.research;
 
+import elucent.rootsclassic.Const;
+import elucent.rootsclassic.component.ComponentRegistry;
+import elucent.rootsclassic.registry.RootsRegistry;
+import elucent.rootsclassic.ritual.RitualBase;
+import elucent.rootsclassic.ritual.RitualBaseRegistry;
+import elucent.rootsclassic.ritual.RitualRegistry;
 import io.github.fabricators_of_create.porting_lib.event.common.RecipesUpdatedCallback;
+import net.minecraft.core.MappedRegistry;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.level.block.Blocks;
 
 import java.util.ArrayList;
 
@@ -15,8 +26,8 @@ public class ResearchManager {
     public static void reload(RecipeManager recipeManager) {
         globalResearches.clear();
 
-        /*
-        IForgeRegistry<RitualBase> ritualRegistry = RitualBaseRegistry.RITUALS.get();
+
+        MappedRegistry<RitualBase> ritualRegistry = RitualBaseRegistry.RITUALS.get();
         //create first page of tablet book
         globalResearches.add(new ResearchGroup("nature", "Natural Arts")
                 .addResearch(new ResearchBase("bark_harvesting", new ItemStack(RootsRegistry.BARK_KNIFE.get()))
@@ -307,8 +318,6 @@ public class ResearchManager {
                         .addPage(new ResearchPage())
                         .addPage(new ResearchPage()
                                 .addAltarRecipe(RitualRegistry.TIME_SHIFT.get()))));
-
-         */
     }
 
     public static ResearchBase getResearch(String groupName, String researchName) {

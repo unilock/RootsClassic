@@ -2,9 +2,18 @@ package elucent.rootsclassic.component;
 
 import elucent.rootsclassic.Const;
 import elucent.rootsclassic.component.components.*;
+import elucent.rootsclassic.recipe.ComponentRecipe;
+import elucent.rootsclassic.registry.RootsRecipes;
 import io.github.fabricators_of_create.porting_lib.util.LazyRegistrar;
 import io.github.fabricators_of_create.porting_lib.util.RegistryObject;
 import net.minecraft.ChatFormatting;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.Container;
+import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.level.Level;
+
+import java.util.List;
+import java.util.Optional;
 
 public class ComponentRegistry {
     public static final LazyRegistrar<ComponentBase> COMPONENTS = LazyRegistrar.create(ComponentBaseRegistry.registryLocation, Const.MODID);
@@ -75,4 +84,25 @@ public class ComponentRegistry {
     public static final RegistryObject<ComponentBase> RADIANT_DAISY = COMPONENTS.register("radiant_daisy", () ->
             new ComponentRadiantDaisy().setPrimaryColor(255, 255, 255).setSecondaryColor(255, 255, 255).setTextColor(ChatFormatting.WHITE));
 
+    /* //TODO: reject invalid stuff from the bowl??!??! the mortar??
+     *
+     * public static boolean isValidEffectItem(ItemStack stack) { for (int i = 0; i < components.size(); i++) { if (components.get(i).getItem() != null && stack != null) { if
+     * (components.get(i).getItem().getItem() == stack.getItem() && components.get(i).getItem().getMetadata() == stack.getMetadata()) { return true; } } } return false; } */
+    public static ComponentRecipe getSpellFromName(RecipeManager mgr, ResourceLocation name) {
+        if (name.getNamespace().equals(Const.MODID) && name.getPath().equals("none")) {
+            return null;
+        }
+        List<ComponentRecipe> recipes = mgr.getAllRecipesFor(RootsRecipes.COMPONENT_RECIPE_TYPE.get());
+        for (ComponentRecipe recipe : recipes) {
+            if (recipe.getEffectResult().equals(name)) {
+                return recipe;
+            }
+        }
+        return null;
+    }
+
+    public static ComponentRecipe getRecipeFromInput(Level levelAccessor, Container inventory) {
+        Optional<ComponentRecipe> recipe = levelAccessor.getRecipeManager().getRecipeFor(RootsRecipes.COMPONENT_RECIPE_TYPE.get(), inventory, levelAccessor);
+        return recipe.orElse(null);
+    }
 }
