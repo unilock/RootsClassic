@@ -29,9 +29,9 @@ dependencies {
 	modImplementation("io.github.fabricators_of_create.Porting-Lib:porting-lib:${project.portinglib_version}")
 	modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-base:${project.cc_version}"
 	modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${project.cc_version}"
-	modImplementation "net.minecraftforge:forgeconfigapiport-fabric:4.2.10"
-	implementation 'com.electronwill.night-config:core:3.6.5'
-	implementation 'com.electronwill.night-config:toml:3.6.5'
+	modImplementation "net.minecraftforge:forgeconfigapiport-fabric:${project.configapi_version}"
+	implementation "com.electronwill.night-config:core:${project.nightconfig_version}"
+	implementation "com.electronwill.night-config:toml:${project.nightconfig_version}"
 }
 
 processResources {
