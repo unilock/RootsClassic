@@ -28,6 +28,9 @@
     "client": [
       "elucent.rootsclassic.RootsClient"
     ],
+    "fabric-datagen": [
+      "elucent.rootsclassic.data.RootsDataGen"
+    ],
     "cardinal-components": [
       "elucent.rootsclassic.capability.RootsCapabilityManager"
     ]
