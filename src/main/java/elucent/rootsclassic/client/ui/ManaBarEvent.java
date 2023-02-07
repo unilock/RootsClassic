@@ -31,12 +31,12 @@ public class ManaBarEvent {
             boolean showBar = player.getMainHandItem().getItem() instanceof IManaRelatedItem || player.getOffhandItem().getItem() instanceof IManaRelatedItem;
             IManaCapability capability = RootsCapabilityManager.MANA_CAPABILITY.maybeGet(player).orElse(null);
             if(!showBar || capability == null) {
-                return true;
+                return false;
             }
             if(capability.getMaxMana() > 0) {
                 drawManaBar(player, capability, poseStack, window);
             }
-            return true;
+            return false;
         });
     }
 
