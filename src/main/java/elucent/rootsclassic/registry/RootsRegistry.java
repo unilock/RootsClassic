@@ -3,9 +3,17 @@ package elucent.rootsclassic.registry;
 import elucent.rootsclassic.Const;
 import elucent.rootsclassic.Roots;
 import elucent.rootsclassic.block.*;
+import elucent.rootsclassic.block.altar.AltarBlock;
+import elucent.rootsclassic.block.altar.AltarBlockEntity;
+import elucent.rootsclassic.block.brazier.BlockBrazier;
+import elucent.rootsclassic.block.brazier.BrazierBlockEntity;
 import elucent.rootsclassic.block.flowers.FlareOrchidBlock;
 import elucent.rootsclassic.block.flowers.MidnightBloomBlock;
 import elucent.rootsclassic.block.flowers.RadiantDaisyBlock;
+import elucent.rootsclassic.block.imbuer.ImbuerBlock;
+import elucent.rootsclassic.block.imbuer.ImbuerBlockEntity;
+import elucent.rootsclassic.block.mortar.MortarBlock;
+import elucent.rootsclassic.block.mortar.MortarBlockEntity;
 import elucent.rootsclassic.blockentity.*;
 import elucent.rootsclassic.item.*;
 import elucent.rootsclassic.item.powder.SpellPowderItem;
@@ -30,18 +38,18 @@ public class RootsRegistry {
      * Blocks
      */
     //registerBlock(druidChalice = new BlockDruidChalice(), "druidChalice");
-    //public static final RegistryObject<Block> MORTAR = BLOCKS.register("mortar", () -> new MortarBlock(BlockBehaviour.Properties.of(Material.CLAY).strength(1.0F)));
-    //public static final RegistryObject<BlockEntityType<MortarBlockEntity>> MORTAR_TILE = BLOCK_ENTITY_TYPES.register("mortar", () -> BlockEntityType.Builder.of(MortarBlockEntity::new,
-            //RootsRegistry.MORTAR.get()).build(null));
-    //public static final RegistryObject<Block> ALTAR = BLOCKS.register("altar", () -> new AltarBlock(BlockBehaviour.Properties.of(Material.CLAY).strength(1.0F)));
-    //public static final RegistryObject<BlockEntityType<AltarBlockEntity>> ALTAR_TILE = BLOCK_ENTITY_TYPES.register("altar", () -> BlockEntityType.Builder.of(AltarBlockEntity::new,
-            //RootsRegistry.ALTAR.get()).build(null));
-    //public static final RegistryObject<Block> BRAZIER = BLOCKS.register("brazier", () -> new BlockBrazier(BlockBehaviour.Properties.of(Material.CLAY).strength(1.0F)));
-    //public static final RegistryObject<BlockEntityType<BrazierBlockEntity>> BRAZIER_TILE = BLOCK_ENTITY_TYPES.register("brazier", () -> BlockEntityType.Builder.of(BrazierBlockEntity::new,
-            //RootsRegistry.BRAZIER.get()).build(null));
-    //public static final RegistryObject<Block> IMBUER = BLOCKS.register("imbuer", () -> new ImbuerBlock(BlockBehaviour.Properties.of(Material.CLAY).strength(1.0F)));
-    //public static final RegistryObject<BlockEntityType<ImbuerBlockEntity>> IMBUER_TILE = BLOCK_ENTITY_TYPES.register("imbuer", () -> BlockEntityType.Builder.of(ImbuerBlockEntity::new,
-            //RootsRegistry.IMBUER.get()).build(null));
+    public static final RegistryObject<Block> MORTAR = BLOCKS.register("mortar", () -> new MortarBlock(BlockBehaviour.Properties.of(Material.CLAY).strength(1.0F)));
+    public static final RegistryObject<BlockEntityType<MortarBlockEntity>> MORTAR_TILE = BLOCK_ENTITY_TYPES.register("mortar", () -> BlockEntityType.Builder.of(MortarBlockEntity::new,
+            RootsRegistry.MORTAR.get()).build(null));
+    public static final RegistryObject<Block> ALTAR = BLOCKS.register("altar", () -> new AltarBlock(BlockBehaviour.Properties.of(Material.CLAY).strength(1.0F)));
+    public static final RegistryObject<BlockEntityType<AltarBlockEntity>> ALTAR_TILE = BLOCK_ENTITY_TYPES.register("altar", () -> BlockEntityType.Builder.of(AltarBlockEntity::new,
+            RootsRegistry.ALTAR.get()).build(null));
+    public static final RegistryObject<Block> BRAZIER = BLOCKS.register("brazier", () -> new BlockBrazier(BlockBehaviour.Properties.of(Material.CLAY).strength(1.0F)));
+    public static final RegistryObject<BlockEntityType<BrazierBlockEntity>> BRAZIER_TILE = BLOCK_ENTITY_TYPES.register("brazier", () -> BlockEntityType.Builder.of(BrazierBlockEntity::new,
+            RootsRegistry.BRAZIER.get()).build(null));
+    public static final RegistryObject<Block> IMBUER = BLOCKS.register("imbuer", () -> new ImbuerBlock(BlockBehaviour.Properties.of(Material.CLAY).strength(1.0F)));
+    public static final RegistryObject<BlockEntityType<ImbuerBlockEntity>> IMBUER_TILE = BLOCK_ENTITY_TYPES.register("imbuer", () -> BlockEntityType.Builder.of(ImbuerBlockEntity::new,
+            RootsRegistry.IMBUER.get()).build(null));
     public static final RegistryObject<Block> MUNDANE_STANDING_STONE = BLOCKS.register("mundane_standing_stone", () -> new MundaneStandingStoneBlock(BlockBehaviour.Properties.of(Material.STONE).strength(1.0F)));
     public static final RegistryObject<Block> ATTUNED_STANDING_STONE = BLOCKS.register("attuned_standing_stone", () -> new AttunedStandingStoneBlock(BlockBehaviour.Properties.of(Material.STONE).strength(1.0F)));
     public static final RegistryObject<Block> VACUUM_STANDING_STONE = BLOCKS.register("vacuum_standing_stone", () -> new VacuumStandingStoneBlock(BlockBehaviour.Properties.of(Material.STONE).strength(1.0F)));
@@ -113,10 +121,10 @@ public class RootsRegistry {
     /**
      * Block Items
      */
-    //public static final RegistryObject<Item> MORTAR_ITEM = ITEMS.register("mortar", () -> new BlockItem(RootsRegistry.MORTAR.get(), itemBuilder().tab(Roots.tab)));
-    //public static final RegistryObject<Item> ALTAR_ITEM = ITEMS.register("altar", () -> new BlockItem(RootsRegistry.ALTAR.get(), itemBuilder().tab(Roots.tab)));
-    //public static final RegistryObject<Item> BRAZIER_ITEM = ITEMS.register("brazier", () -> new BlockItem(RootsRegistry.BRAZIER.get(), itemBuilder().tab(Roots.tab)));
-    //public static final RegistryObject<Item> IMBUER_ITEM = ITEMS.register("imbuer", () -> new BlockItem(RootsRegistry.IMBUER.get(), itemBuilder().tab(Roots.tab)));
+    public static final RegistryObject<Item> MORTAR_ITEM = ITEMS.register("mortar", () -> new BlockItem(RootsRegistry.MORTAR.get(), itemBuilder().tab(Roots.tab)));
+    public static final RegistryObject<Item> ALTAR_ITEM = ITEMS.register("altar", () -> new BlockItem(RootsRegistry.ALTAR.get(), itemBuilder().tab(Roots.tab)));
+    public static final RegistryObject<Item> BRAZIER_ITEM = ITEMS.register("brazier", () -> new BlockItem(RootsRegistry.BRAZIER.get(), itemBuilder().tab(Roots.tab)));
+    public static final RegistryObject<Item> IMBUER_ITEM = ITEMS.register("imbuer", () -> new BlockItem(RootsRegistry.IMBUER.get(), itemBuilder().tab(Roots.tab)));
     public static final RegistryObject<Item> MUNDANE_STANDING_STONE_ITEM = ITEMS.register("mundane_standing_stone", () -> new BlockItem(RootsRegistry.MUNDANE_STANDING_STONE.get(), itemBuilder().tab(Roots.tab)));
     public static final RegistryObject<Item> ATTUNED_STANDING_STONE_ITEM = ITEMS.register("attuned_standing_stone", () -> new BlockItem(RootsRegistry.ATTUNED_STANDING_STONE.get(), itemBuilder().tab(Roots.tab)));
     public static final RegistryObject<Item> VACUUM_STANDING_STONE_ITEM = ITEMS.register("vacuum_standing_stone", () -> new BlockItem(RootsRegistry.VACUUM_STANDING_STONE.get(), itemBuilder().tab(Roots.tab)));
