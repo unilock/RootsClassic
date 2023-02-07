@@ -31,11 +31,16 @@ import net.minecraft.world.inventory.InventoryMenu;
 public class ClientHandler {
     public static final ModelLayerLocation SYLVAN_ARMOR = new ModelLayerLocation(new ResourceLocation(Const.MODID, "main"), "sylvan_armor");
     public static final ModelLayerLocation WILDWOOD_ARMOR = new ModelLayerLocation(new ResourceLocation(Const.MODID, "main"), "wildwood_armor");
+    private static SylvanArmorModel sylvanHeadModel;
+    private static SylvanArmorModel sylvanChestModel;
+    private static SylvanArmorModel sylvanLegModel;
+    private static SylvanArmorModel sylvanBootModel;
     private static WildwoodArmorModel wildHeadModel;
     private static WildwoodArmorModel wildChestModel;
     private static WildwoodArmorModel wildLegModel;
     private static WildwoodArmorModel wildBootModel;
-    private static final ResourceLocation texture = new ResourceLocation(Const.MODID, "textures/models/armor/wildwood.png");
+    private static final ResourceLocation sylvanTexture = new ResourceLocation(Const.MODID, "textures/models/armor/sylvan.png");
+    private static final ResourceLocation woodTexture = new ResourceLocation(Const.MODID, "textures/models/armor/wildwood.png");
 
     public static void onClientSetup() {
         ItemProperties.register(RootsRegistry.STAFF.get(), new ResourceLocation("imbued"), ((itemStack, clientLevel, livingEntity, i) ->
@@ -54,6 +59,52 @@ public class ClientHandler {
         EntityModelLayerRegistry.registerModelLayer(WILDWOOD_ARMOR, WildwoodArmorModel::createArmorDefinition);
 
         ArmorRenderer.register((matrices, vertexConsumers, stack, entity, slot, light, contextModel) -> {
+            if(sylvanHeadModel == null) {
+                sylvanHeadModel = new SylvanArmorModel(Minecraft.getInstance().getEntityModels().bakeLayer(SYLVAN_ARMOR), slot);
+            }
+
+            contextModel.copyPropertiesTo(sylvanHeadModel);
+            sylvanHeadModel.setAllVisible(false);
+            sylvanHeadModel.head.visible = slot == EquipmentSlot.HEAD;
+            ArmorRenderer.renderPart(matrices, vertexConsumers, light, stack, sylvanHeadModel, sylvanTexture);
+        }, RootsRegistry.SYLVAN_HOOD.get());
+
+        ArmorRenderer.register((matrices, vertexConsumers, stack, entity, slot, light, contextModel) -> {
+            if(sylvanChestModel == null) {
+                sylvanChestModel = new SylvanArmorModel(Minecraft.getInstance().getEntityModels().bakeLayer(SYLVAN_ARMOR), slot);
+            }
+
+            contextModel.copyPropertiesTo(sylvanChestModel);
+            sylvanChestModel.setAllVisible(false);
+            sylvanChestModel.body.visible = slot == EquipmentSlot.CHEST;
+            ArmorRenderer.renderPart(matrices, vertexConsumers, light, stack, sylvanChestModel, sylvanTexture);
+        }, RootsRegistry.SYLVAN_ROBE.get());
+
+        ArmorRenderer.register((matrices, vertexConsumers, stack, entity, slot, light, contextModel) -> {
+            if(sylvanLegModel == null) {
+                sylvanLegModel = new SylvanArmorModel(Minecraft.getInstance().getEntityModels().bakeLayer(SYLVAN_ARMOR), slot);
+            }
+
+            contextModel.copyPropertiesTo(sylvanLegModel);
+            sylvanLegModel.setAllVisible(false);
+            sylvanLegModel.leftLeg.visible = slot == EquipmentSlot.LEGS;
+            sylvanLegModel.rightLeg.visible = slot == EquipmentSlot.LEGS;
+            ArmorRenderer.renderPart(matrices, vertexConsumers, light, stack, sylvanLegModel, sylvanTexture);
+        }, RootsRegistry.SYLVAN_TUNIC.get());
+
+        ArmorRenderer.register((matrices, vertexConsumers, stack, entity, slot, light, contextModel) -> {
+            if(sylvanBootModel == null) {
+                sylvanBootModel = new SylvanArmorModel(Minecraft.getInstance().getEntityModels().bakeLayer(SYLVAN_ARMOR), slot);
+            }
+
+            contextModel.copyPropertiesTo(sylvanBootModel);
+            sylvanBootModel.setAllVisible(false);
+            sylvanBootModel.leftFoot.visible = slot == EquipmentSlot.FEET;
+            sylvanBootModel.rightFoot.visible = slot == EquipmentSlot.FEET;
+            ArmorRenderer.renderPart(matrices, vertexConsumers, light, stack, sylvanBootModel, sylvanTexture);
+        }, RootsRegistry.SYLVAN_BOOTS.get());
+
+        ArmorRenderer.register((matrices, vertexConsumers, stack, entity, slot, light, contextModel) -> {
             if(wildHeadModel == null) {
                 wildHeadModel = new WildwoodArmorModel(Minecraft.getInstance().getEntityModels().bakeLayer(WILDWOOD_ARMOR), slot);
             }
@@ -61,7 +112,7 @@ public class ClientHandler {
             contextModel.copyPropertiesTo(wildHeadModel);
             wildHeadModel.setAllVisible(false);
             wildHeadModel.head.visible = slot == EquipmentSlot.HEAD;
-            ArmorRenderer.renderPart(matrices, vertexConsumers, light, stack, wildHeadModel, texture);
+            ArmorRenderer.renderPart(matrices, vertexConsumers, light, stack, wildHeadModel, woodTexture);
         }, RootsRegistry.WILDWOOD_MASK.get());
 
         ArmorRenderer.register((matrices, vertexConsumers, stack, entity, slot, light, contextModel) -> {
@@ -71,7 +122,7 @@ public class ClientHandler {
             contextModel.copyPropertiesTo(wildChestModel);
             wildChestModel.setAllVisible(false);
             wildChestModel.body.visible = slot == EquipmentSlot.CHEST;
-            ArmorRenderer.renderPart(matrices, vertexConsumers, light, stack, wildChestModel, texture);
+            ArmorRenderer.renderPart(matrices, vertexConsumers, light, stack, wildChestModel, woodTexture);
         }, RootsRegistry.WILDWOOD_PLATE.get());
 
         ArmorRenderer.register((matrices, vertexConsumers, stack, entity, slot, light, contextModel) -> {
@@ -82,7 +133,7 @@ public class ClientHandler {
             wildLegModel.setAllVisible(false);
             wildLegModel.leftLeg.visible = slot == EquipmentSlot.LEGS;
             wildLegModel.rightLeg.visible = slot == EquipmentSlot.LEGS;
-            ArmorRenderer.renderPart(matrices, vertexConsumers, light, stack, wildLegModel, texture);
+            ArmorRenderer.renderPart(matrices, vertexConsumers, light, stack, wildLegModel, woodTexture);
         }, RootsRegistry.WILDWOOD_LEGGINGS.get());
 
         ArmorRenderer.register((matrices, vertexConsumers, stack, entity, slot, light, contextModel) -> {
@@ -93,7 +144,7 @@ public class ClientHandler {
             wildBootModel.setAllVisible(false);
             wildBootModel.leftFoot.visible = slot == EquipmentSlot.FEET;
             wildBootModel.rightFoot.visible = slot == EquipmentSlot.FEET;
-            ArmorRenderer.renderPart(matrices, vertexConsumers, light, stack, wildBootModel, texture);
+            ArmorRenderer.renderPart(matrices, vertexConsumers, light, stack, wildBootModel, woodTexture);
         }, RootsRegistry.WILDWOOD_BOOTS.get());
     }
 
