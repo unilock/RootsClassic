@@ -1,13 +1,7 @@
 package elucent.rootsclassic.research;
 
-import elucent.rootsclassic.Const;
-import elucent.rootsclassic.registry.RootsRegistry;
 import io.github.fabricators_of_create.porting_lib.event.common.RecipesUpdatedCallback;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeManager;
-import net.minecraft.world.level.block.Blocks;
 
 import java.util.ArrayList;
 

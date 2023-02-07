@@ -5,10 +5,6 @@ import elucent.rootsclassic.component.components.*;
 import io.github.fabricators_of_create.porting_lib.util.LazyRegistrar;
 import io.github.fabricators_of_create.porting_lib.util.RegistryObject;
 import net.minecraft.ChatFormatting;
-import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.Container;
-import net.minecraft.world.level.Level;
 
 public class ComponentRegistry {
     public static final LazyRegistrar<ComponentBase> COMPONENTS = LazyRegistrar.create(ComponentBaseRegistry.registryLocation, Const.MODID);
