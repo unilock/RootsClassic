@@ -5,10 +5,11 @@ import elucent.rootsclassic.recipe.ComponentRecipe;
 import elucent.rootsclassic.registry.RootsRecipes;
 import elucent.rootsclassic.registry.RootsRegistry;
 import elucent.rootsclassic.util.InventoryUtil;
-import io.github.fabricators_of_create.porting_lib.transfer.item.ItemHandlerHelper;
+import io.github.fabricators_of_create.porting_lib.transfer.TransferUtil;
 import io.github.fabricators_of_create.porting_lib.transfer.item.ItemStackHandler;
 import io.github.fabricators_of_create.porting_lib.util.LazyOptional;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
+import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -87,6 +88,7 @@ public class MortarBlockEntity extends BEBase {
             if (heldItem.getItem() == Items.GLOWSTONE_DUST || heldItem.getItem() == Items.REDSTONE || heldItem.getItem() == Items.GUNPOWDER) {
                 int maxCapacity = ComponentRecipe.getModifierCapacity(InventoryUtil.createIInventory(inventory));
                 int modifierCount = ComponentRecipe.getModifierCount(InventoryUtil.createIInventory(inventory));
+                /*
                 if (modifierCount < maxCapacity) {
                     ItemStack restStack = ItemHandlerHelper.insertItem(inventory, heldCopy, false);
                     if (restStack.isEmpty()) {
@@ -98,7 +100,26 @@ public class MortarBlockEntity extends BEBase {
                         return InteractionResult.FAIL;
                     }
                 }
+
+                 */
+
+                if(modifierCount < maxCapacity) {
+                    if(heldItem.isEmpty()) {
+                        return InteractionResult.PASS;
+                    }
+                    try (Transaction t = TransferUtil.getTransaction()) {
+                        long inserted = inventory.insert(ItemVariant.of(heldItem), 1, t);
+                        if (inserted == 1) {
+                            heldItem.shrink(1);
+                            setChanged();
+                            levelAccessor.sendBlockUpdated(pos, state, levelAccessor.getBlockState(pos), 3);
+                            t.commit();
+                        }
+                        return InteractionResult.SUCCESS;
+                    }
+                }
             } else {
+                /*
                 ItemStack restStack = ItemHandlerHelper.insertItem(inventory, heldCopy, false);
                 if (restStack.isEmpty()) {
                     heldItem.shrink(1);
@@ -107,6 +128,21 @@ public class MortarBlockEntity extends BEBase {
                     return InteractionResult.SUCCESS;
                 } else {
                     return InteractionResult.FAIL;
+                }
+
+                 */
+
+                try (Transaction t = TransferUtil.getTransaction()) {
+                    long inserted = inventory.insert(ItemVariant.of(heldItem), 1, t);
+                    if (inserted == 1) {
+                        heldItem.shrink(1);
+                        setChanged();
+                        levelAccessor.sendBlockUpdated(pos, state, levelAccessor.getBlockState(pos), 3);
+                        t.commit();
+                    } else {
+                        return InteractionResult.FAIL;
+                    }
+                    return InteractionResult.SUCCESS;
                 }
             }
         }

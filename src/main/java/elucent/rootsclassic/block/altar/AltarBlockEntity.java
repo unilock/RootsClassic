@@ -9,10 +9,11 @@ import elucent.rootsclassic.ritual.RitualBase;
 import elucent.rootsclassic.ritual.RitualBaseRegistry;
 import elucent.rootsclassic.ritual.RitualRegistry;
 import elucent.rootsclassic.util.InventoryUtil;
-import io.github.fabricators_of_create.porting_lib.transfer.item.ItemHandlerHelper;
+import io.github.fabricators_of_create.porting_lib.transfer.TransferUtil;
 import io.github.fabricators_of_create.porting_lib.transfer.item.ItemStackHandler;
 import io.github.fabricators_of_create.porting_lib.util.LazyOptional;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
+import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -167,6 +168,7 @@ public class AltarBlockEntity extends BEBase {
                 //        return true;
                 //      }
             } else {
+                /*
                 //try to insert an item into the altar
                 if (!InventoryUtil.isFull(inventory) && getProgress() == 0) {
                     ItemStack copyStack = heldItem.copy();
@@ -176,6 +178,22 @@ public class AltarBlockEntity extends BEBase {
                         heldItem.shrink(1);
                         setChanged();
                         levelAccessor.sendBlockUpdated(pos, state, levelAccessor.getBlockState(pos), 3);
+                    }
+                    return InteractionResult.SUCCESS;
+                }
+
+                 */
+
+                //try to insert an item into the altar
+                if (getProgress() != 0 || heldItem.isEmpty())
+                    return InteractionResult.PASS;
+                try (Transaction t = TransferUtil.getTransaction()) {
+                    long inserted = inventory.insert(ItemVariant.of(heldItem), 1, t);
+                    if (inserted == 1) {
+                        heldItem.shrink(1);
+                        setChanged();
+                        levelAccessor.sendBlockUpdated(pos, state, levelAccessor.getBlockState(pos), 3);
+                        t.commit();
                     }
                     return InteractionResult.SUCCESS;
                 }
