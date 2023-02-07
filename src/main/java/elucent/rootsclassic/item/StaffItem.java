@@ -88,15 +88,12 @@ public class StaffItem extends Item implements IManaRelatedItem, ReequipAnimatio
                         int efficiency = tag.getInt(Const.NBT_EFFICIENCY);
                         int size = tag.getInt(Const.NBT_SIZE);
                         Player player = (Player) caster;
-                        /*
                         if (player.getItemBySlot(EquipmentSlot.HEAD).getItem() instanceof SylvanArmorItem
                                 && player.getItemBySlot(EquipmentSlot.CHEST).getItem() instanceof SylvanArmorItem
                                 && player.getItemBySlot(EquipmentSlot.LEGS).getItem() instanceof SylvanArmorItem
                                 && player.getItemBySlot(EquipmentSlot.FEET).getItem() instanceof SylvanArmorItem) {
                             potency += 1;
                         }
-
-                         */
                         IManaCapability manaCap = RootsCapabilityManager.MANA_CAPABILITY.maybeGet(player).orElse(null);
                         if (manaCap.getMana() >= comp.getManaCost() / (efficiency + 1)) {
                             manaCap.setMana(manaCap.getMana() - (comp.getManaCost() / (efficiency + 1)));

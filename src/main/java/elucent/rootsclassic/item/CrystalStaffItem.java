@@ -18,6 +18,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -59,15 +60,12 @@ public class CrystalStaffItem extends Item implements IManaRelatedItem, UsingTic
                 int potency = getPotency(stack) + 1;
                 int efficiency = CrystalStaffItem.getEfficiency(stack);
                 int size = CrystalStaffItem.getSize(stack);
-                /*
                 if (player.getItemBySlot(EquipmentSlot.HEAD).getItem() instanceof SylvanArmorItem
                         && player.getItemBySlot(EquipmentSlot.CHEST).getItem() instanceof SylvanArmorItem
                         && player.getItemBySlot(EquipmentSlot.LEGS).getItem() instanceof SylvanArmorItem
                         && player.getItemBySlot(EquipmentSlot.FEET).getItem() instanceof SylvanArmorItem) {
                     potency += 1;
                 }
-
-                 */
                 //        double xpCost = (comp.getManaCost() + potency) * (1.0 - 0.25 * efficiency);
                 IManaCapability manaCap = RootsCapabilityManager.MANA_CAPABILITY.maybeGet(player).orElse(null);
                 if (manaCap.getMana() >= comp.getManaCost() / (efficiency + 1)) {
