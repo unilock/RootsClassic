@@ -2,6 +2,7 @@ package elucent.rootsclassic.entity;
 
 import elucent.rootsclassic.client.particles.MagicAuraParticleData;
 import elucent.rootsclassic.registry.RootsEntities;
+import io.github.fabricators_of_create.porting_lib.entity.ExtraSpawnDataEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.world.entity.Entity;
@@ -97,14 +98,6 @@ public class EntityAccelerator extends Entity {
 
     @Override
     public Packet<?> getAddEntityPacket() {
-        return null;
+        return ExtraSpawnDataEntity.createExtraDataSpawnPacket(this);
     }
-
-    /*
-    @Override
-    public Packet<?> getAddEntityPacket() {
-        return NetworkHooks.getEntitySpawningPacket(this);
-    }
-
-     */
 }

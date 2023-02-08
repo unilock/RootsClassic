@@ -70,7 +70,7 @@ public class AltarBlockEntity extends BEBase {
         }
         if (tag.contains("ritualName")) {
             setRitualNameFromString(tag.getString("ritualName"));
-            setRitualCurrent(RitualBaseRegistry.RITUALS.get().get(getRitualName()));
+            setRitualCurrent(RitualBaseRegistry.RITUALS.get(getRitualName()));
         }
         if (tag.contains("progress")) {
             setProgress(tag.getInt("progress"));
@@ -143,7 +143,7 @@ public class AltarBlockEntity extends BEBase {
                 //does it match everything else?
                 if (ritual.incenseMatches(level, pos)) {
                     setRitualCurrent(ritual);
-                    setRitualName(RitualBaseRegistry.RITUALS.get().getKey(ritual));
+                    setRitualName(RitualBaseRegistry.RITUALS.getKey(ritual));
                     setIncenses(RitualRegistry.getIncenses(levelAccessor, pos));
                     setProgress(RECIPE_PROGRESS_TIME);
                     for (BrazierBlockEntity brazier : ritual.getRecipeBraziers(levelAccessor, pos)) {

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "X": {
+      "tag": "c:stone"
+    }
+  },
+  "pattern": [
+    "X X",
+    "X X",
+    " X "
+  ],
+  "result": {
+    "item": "rootsclassic:mortar"
+  }
+}

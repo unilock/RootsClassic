@@ -4,6 +4,10 @@ import elucent.rootsclassic.Const;
 import elucent.rootsclassic.client.model.SylvanArmorModel;
 import elucent.rootsclassic.client.model.WildwoodArmorModel;
 import elucent.rootsclassic.client.particles.*;
+import elucent.rootsclassic.client.renderer.block.AltarBER;
+import elucent.rootsclassic.client.renderer.block.BrazierBER;
+import elucent.rootsclassic.client.renderer.block.ImbuerBER;
+import elucent.rootsclassic.client.renderer.block.MortarBER;
 import elucent.rootsclassic.client.renderer.entity.AcceleratorRenderer;
 import elucent.rootsclassic.client.renderer.entity.PhantomSkeletonRenderer;
 import elucent.rootsclassic.component.ComponentBase;
@@ -14,6 +18,7 @@ import elucent.rootsclassic.registry.ParticleRegistry;
 import elucent.rootsclassic.registry.RootsEntities;
 import elucent.rootsclassic.registry.RootsRegistry;
 import elucent.rootsclassic.util.RootsUtil;
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
@@ -22,6 +27,8 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
@@ -49,6 +56,13 @@ public class ClientHandler {
     }
 
     public static void registerEntityRenders() {
+        BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(), RootsRegistry.FLARE_ORCHID.get(), RootsRegistry.MIDNIGHT_BLOOM.get(), RootsRegistry.RADIANT_DAISY.get(), RootsRegistry.ALTAR.get());
+
+        BlockEntityRenderers.register(RootsRegistry.MORTAR_TILE.get(), MortarBER::new);
+        BlockEntityRenderers.register(RootsRegistry.IMBUER_TILE.get(), ImbuerBER::new);
+        BlockEntityRenderers.register(RootsRegistry.ALTAR_TILE.get(), AltarBER::new);
+        BlockEntityRenderers.register(RootsRegistry.BRAZIER_TILE.get(), BrazierBER::new);
+
         EntityRendererRegistry.register(RootsEntities.PHANTOM_SKELETON.get(), PhantomSkeletonRenderer::new);
         EntityRendererRegistry.register(RootsEntities.ENTITY_ACCELERATOR.get(), AcceleratorRenderer::new);
         EntityRendererRegistry.register(RootsEntities.TILE_ACCELERATOR.get(), AcceleratorRenderer::new);

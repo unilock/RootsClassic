@@ -50,11 +50,8 @@ public class DropModifier {
                 BlockState state = context.getParamOrNull(LootContextParams.BLOCK_STATE);
                 Block block = state.getBlock();
                 RandomSource rand = context.getRandom();
-                Roots.LOGGER.warn("1");
                 if (block instanceof TallGrassBlock) {
-                    Roots.LOGGER.warn("2");
                     if (RootsConfig.COMMON.oldRootDropChance.get() > 0 && rand.nextInt(RootsConfig.COMMON.oldRootDropChance.get()) == 0) {
-                        Roots.LOGGER.warn("3");
                         generatedLoot.add(new ItemStack(RootsRegistry.OLD_ROOT.get(), 1));
                     }
                 }

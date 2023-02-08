@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "B": {
+      "item": "minecraft:stone_bricks"
+    },
+    "L": {
+      "tag": "c:lapis_blocks"
+    },
+    "S": {
+      "tag": "c:stone"
+    }
+  },
+  "pattern": [
+    "SBS",
+    "BLB",
+    "SBS"
+  ],
+  "result": {
+    "item": "rootsclassic:mundane_standing_stone"
+  }
+}

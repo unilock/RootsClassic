@@ -29,10 +29,13 @@
       "elucent.rootsclassic.RootsClient"
     ],
     "fabric-datagen": [
-      "elucent.rootsclassic.data.RootsDataGen"
+      "elucent.rootsclassic.datagen.RootsDataGen"
     ],
     "cardinal-components": [
       "elucent.rootsclassic.capability.RootsCapabilityManager"
+    ],
+    "jei_mod_plugin": [
+      "elucent.rootsclassic.compat.jei.JEIPlugin"
     ]
   },
   "mixins": [

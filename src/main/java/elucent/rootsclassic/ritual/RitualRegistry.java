@@ -456,7 +456,7 @@ public class RitualRegistry {
 
 
     public static RitualBase findMatchingByIngredients(AltarBlockEntity altar) {
-        for (RitualBase ritual : RitualBaseRegistry.RITUALS.get().stream().toList()) {
+        for (RitualBase ritual : RitualBaseRegistry.RITUALS.stream().toList()) {
             //      if (ritual.getName().equals("healer_stone_crafting")) {
             //        Roots.logger.info("healer stone?");
             //        for (ItemStack s : ritual.getIngredients()) {

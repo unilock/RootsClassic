@@ -48,7 +48,7 @@ public class ComponentBase {
     }
 
     public MutableComponent getEffectName() {
-        return Component.translatable("rootsclassic.component." + ComponentBaseRegistry.COMPONENTS.get(ComponentBaseRegistry.registryLocation));
+        return Component.translatable("rootsclassic.component." + ComponentBaseRegistry.COMPONENTS.getKey(this));
     }
 
     public ChatFormatting getTextColor() {

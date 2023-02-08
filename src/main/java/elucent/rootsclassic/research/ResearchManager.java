@@ -27,7 +27,7 @@ public class ResearchManager {
         globalResearches.clear();
 
 
-        MappedRegistry<RitualBase> ritualRegistry = RitualBaseRegistry.RITUALS.get();
+        MappedRegistry<RitualBase> ritualRegistry = RitualBaseRegistry.RITUALS;
         //create first page of tablet book
         globalResearches.add(new ResearchGroup("nature", "Natural Arts")
                 .addResearch(new ResearchBase("bark_harvesting", new ItemStack(RootsRegistry.BARK_KNIFE.get()))
