@@ -19,6 +19,7 @@ import elucent.rootsclassic.item.*;
 import elucent.rootsclassic.item.powder.SpellPowderItem;
 import io.github.fabricators_of_create.porting_lib.util.LazyRegistrar;
 import io.github.fabricators_of_create.porting_lib.util.RegistryObject;
+import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.BlockItem;
@@ -144,9 +145,10 @@ public class RootsRegistry {
     }
 
 
-    public static void registerCompostables() {
+    public static void registerStats() {
         ComposterBlock.COMPOSTABLES.put(BLACKCURRANT.get(), 0.3F);
         ComposterBlock.COMPOSTABLES.put(REDCURRANT.get(), 0.3F);
         ComposterBlock.COMPOSTABLES.put(WHITECURRANT.get(), 0.3F);
+        FuelRegistry.INSTANCE.add(RootsRegistry.INFERNAL_BULB.get(), 2400);
     }
 }
