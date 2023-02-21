@@ -18,7 +18,7 @@
   },
 
   "license": "MIT",
-  "icon": "assets/modid/icon.png",
+  "icon": "icon.png",
 
   "environment": "*",
   "entrypoints": {
@@ -38,9 +38,6 @@
       "elucent.rootsclassic.compat.jei.JEIPlugin"
     ]
   },
-  "mixins": [
-    "modid.mixins.json"
-  ],
 
   "depends": {
     "fabricloader": ">=0.14.11",
@@ -48,6 +45,9 @@
     "minecraft": "~1.19.2",
     "java": ">=17"
   },
+  "mixins": [
+    "rootsclassic.mixins.json"
+  ],
   "custom": {
     "cardinal-components": [
       "rootsclassic:manacapability"
