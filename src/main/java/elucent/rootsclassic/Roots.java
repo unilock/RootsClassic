@@ -48,7 +48,7 @@ public class Roots implements ModInitializer {
 	}
 
 	private void setup() {
-		RootsRegistry.registerCompostables();
+		RootsRegistry.registerStats();
 		RootsEntities.registerSpawnPlacement();
 	}
 }

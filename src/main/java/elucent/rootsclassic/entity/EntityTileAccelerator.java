@@ -5,6 +5,7 @@ import elucent.rootsclassic.registry.RootsEntities;
 import io.github.fabricators_of_create.porting_lib.entity.ExtraSpawnDataEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -16,7 +17,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.Random;
 
-public class EntityTileAccelerator extends Entity {
+public class EntityTileAccelerator extends Entity implements ExtraSpawnDataEntity {
     private BlockPos bePosition;
     private final Random random = new Random();
     private int lifetime = 0;
@@ -121,4 +122,10 @@ public class EntityTileAccelerator extends Entity {
     public Packet<?> getAddEntityPacket() {
         return ExtraSpawnDataEntity.createExtraDataSpawnPacket(this);
     }
+
+    @Override
+    public void readSpawnData(FriendlyByteBuf friendlyByteBuf) { }
+
+    @Override
+    public void writeSpawnData(FriendlyByteBuf friendlyByteBuf) { }
 }
