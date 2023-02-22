@@ -36,6 +36,9 @@
     ],
     "jei_mod_plugin": [
       "elucent.rootsclassic.compat.jei.JEIPlugin"
+    ],
+    "emi": [
+      "elucent.rootsclassic.compat.emi.EMIPlugin"
     ]
   },
 
