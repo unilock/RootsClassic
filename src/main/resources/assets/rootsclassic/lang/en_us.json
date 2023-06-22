@@ -57,7 +57,7 @@
     "item.rootsclassic.wildwood_leggings.guide": "Obtained using a magic ritual; see Runic Tablet.",
     "item.rootsclassic.wildwood_boots": "Wildwood Boots",
     "item.rootsclassic.wildwood_boots.guide": "Obtained using a magic ritual; see Runic Tablet.",
-    "item.rootsclassic.runic_tablet": "Runic Tablet.",
+    "item.rootsclassic.runic_tablet": "Runic Tablet",
     "item.rootsclassic.runic_tablet.guide": "The guidebook for Roots Classic that explains all spells and rituals.",
     "item.rootsclassic.growth_powder": "Growth Powder",
     "item.rootsclassic.growth_powder.guide": "Use to grow grass on dirt.",
@@ -323,7 +323,7 @@
 
     "rootsclassic.research.spells.radiant_daisy": "Spell Component: Radiance",
     "rootsclassic.research.spells.radiant_daisy.page1title": "Flower of Light",
-    "rootsclassic.research.spells.radiant_daisy.page1info": "Using the mutating flower in the overworld, you create a shining white flower. To create, plant an oxeye daisy. At noon, toss down a glowstone block and one prismarine crystal next to it, and while under the night vision effect, use the powder on the flower.",
+    "rootsclassic.research.spells.radiant_daisy.page1info": "Using the mutating powder in the overworld, you create a shining white flower. To create, plant an oxeye daisy. At noon, toss down a glowstone block and one prismarine crystal next to it, and while under the night vision effect, use the powder on the flower.",
     "rootsclassic.research.spells.radiant_daisy.page2title": "Piercing Rays",
     "rootsclassic.research.spells.radiant_daisy.page2info": "The new flower you have created contains the very essence of the glowing daylight of the overworld. Using the above recipe, you can create a spell that will do very high damage to struck creatures in a large beam in front of you.",
 
