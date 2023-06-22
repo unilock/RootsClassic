@@ -15,9 +15,10 @@ import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.block.Blocks;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ResearchManager {
-    public static ArrayList<ResearchGroup> globalResearches = new ArrayList<>();
+    public static List<ResearchGroup> globalResearches = new ArrayList<>();
 
     public static void onRecipesUpdated() {
         RecipesUpdatedCallback.EVENT.register(ResearchManager::reload);
