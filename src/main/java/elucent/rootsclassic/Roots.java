@@ -10,7 +10,6 @@ import elucent.rootsclassic.registry.ParticleRegistry;
 import elucent.rootsclassic.registry.RootsEntities;
 import elucent.rootsclassic.registry.RootsRecipes;
 import elucent.rootsclassic.registry.RootsRegistry;
-import elucent.rootsclassic.ritual.RitualBaseRegistry;
 import elucent.rootsclassic.ritual.RitualRegistry;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
