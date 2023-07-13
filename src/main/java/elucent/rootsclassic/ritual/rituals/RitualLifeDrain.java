@@ -26,7 +26,7 @@ public class RitualLifeDrain extends RitualBase {
         float drainedHealth = 0;
         if (enemies.size() > 0) {
             for (Monster enemy : enemies) {
-                enemy.hurt(DamageSource.CACTUS, 9);
+                enemy.hurt(levelAccessor.damageSources().cactus(), 9);
                 drainedHealth += 9;
             }
         }

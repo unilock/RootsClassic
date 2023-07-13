@@ -23,7 +23,7 @@ public class RitualMassBreed extends RitualBase {
         if (animals.size() > 0) {
             for (Animal animal : animals) {
                 animal.setInLove(levelAccessor.getNearestPlayer(pos.getX(), pos.getY(), pos.getZ(), 5, false));
-                animal.getExtraCustomData().putInt("InLove", 400);
+                animal.getCustomData().putInt("InLove", 400);
             }
         }
     }

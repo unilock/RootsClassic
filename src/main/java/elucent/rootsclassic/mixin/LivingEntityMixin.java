@@ -21,7 +21,7 @@ public abstract class LivingEntityMixin extends Entity {
     @Inject(method = "tick", at = @At("HEAD"), cancellable = true)
     private void rootsclassic_tick(CallbackInfo ci) {
         LivingEntity entity = ((LivingEntity)(Object)this);
-        CompoundTag persistentData = entity.getExtraCustomData();
+        CompoundTag persistentData = entity.getCustomData();
         if (persistentData.contains(Const.NBT_TRACK_TICKS) && persistentData.contains(Const.NBT_SKIP_TICKS)) {
             int skipTicks = persistentData.getInt(Const.NBT_SKIP_TICKS);
             if (skipTicks > 0) {

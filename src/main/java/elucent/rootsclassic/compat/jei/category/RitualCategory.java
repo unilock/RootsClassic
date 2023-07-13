@@ -15,6 +15,7 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -89,15 +90,16 @@ public class RitualCategory implements IRecipeCategory<RitualWrapper> {
     }
 
     @Override
-    public void draw(RitualWrapper recipe, IRecipeSlotsView recipeSlotsView, PoseStack stack, double mouseX, double mouseY) {
-        IRecipeCategory.super.draw(recipe, recipeSlotsView, stack, mouseX, mouseY);
-        ingredientBackground.draw(stack, 12, 0);
-        incenseBackground.draw(stack, 0, 24);
-        resultBackground.draw(stack, 64, 64);
+    public void draw(RitualWrapper recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY) {
+        PoseStack stack = graphics.pose();
+        IRecipeCategory.super.draw(recipe, recipeSlotsView, graphics, mouseX, mouseY);
+        ingredientBackground.draw(graphics, 12, 0);
+        incenseBackground.draw(graphics, 0, 24);
+        resultBackground.draw(graphics, 64, 64);
         stack.pushPose();
 
         stack.scale(0.5F, 0.5F, 1);
-        grid.draw(stack, 20, 100);
+        grid.draw(graphics, 20, 100);
 
         int basePosX = 63;
         int basePosY = 135;
@@ -106,16 +108,16 @@ public class RitualCategory implements IRecipeCategory<RitualWrapper> {
         for (int i = 0; i < blocks.size(); i++) {
             int xShift = 0;
             int yShift = 0;
-            stone.draw(stack, basePosX, basePosY);
+            stone.draw(graphics, basePosX, basePosY);
             if (blocks.get(i).equals(RootsRegistry.MUNDANE_STANDING_STONE.get())) {
                 xShift = 8 * (int) relativePosition.get(i).getX();
                 yShift = 8 * (int) relativePosition.get(i).getZ();
-                mundaneStone.draw(stack, basePosX + xShift, basePosY + yShift);
+                mundaneStone.draw(graphics, basePosX + xShift, basePosY + yShift);
             }
             if (blocks.get(i).equals(RootsRegistry.ATTUNED_STANDING_STONE.get())) {
                 xShift = 8 * (int) relativePosition.get(i).getX();
                 yShift = 8 * (int) relativePosition.get(i).getZ();
-                attunedStone.draw(stack, basePosX + xShift, basePosY + yShift);
+                attunedStone.draw(graphics, basePosX + xShift, basePosY + yShift);
             }
         }
         stack.popPose();

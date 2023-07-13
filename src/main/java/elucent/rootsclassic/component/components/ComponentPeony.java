@@ -27,7 +27,7 @@ public class ComponentPeony extends ComponentBase {
 
     @Override
     public void castingAction(Player player, int count, int potency, int efficiency, int size) {
-        Level levelAccessor = player.level;
+        Level levelAccessor = player.level();
         int x = player.blockPosition().getX();
         int y = player.blockPosition().getY();
         int z = player.blockPosition().getZ();

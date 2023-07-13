@@ -1,12 +1,11 @@
 package elucent.rootsclassic.component.components;
 
-import elucent.rootsclassic.Const;
 import elucent.rootsclassic.component.ComponentBase;
 import elucent.rootsclassic.component.EnumCastType;
 import elucent.rootsclassic.config.RootsConfig;
+import elucent.rootsclassic.registry.RootsDamageTypes;
 import elucent.rootsclassic.util.RootsUtil;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.EntityDamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -14,7 +13,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.AABB;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ComponentRose extends ComponentBase {
@@ -40,7 +38,7 @@ public class ComponentRose extends ComponentBase {
                     //            }
                     target.hurt(spellAttack(caster), (int) (9 + 2 * potency));
                     RootsUtil.addTickTracking(target);
-                    target.getExtraCustomData().putFloat("RMOD_thornsDamage", 2.0f + (float) potency);
+                    target.getCustomData().putFloat("RMOD_thornsDamage", 2.0f + (float) potency);
                     if (caster instanceof Player player) {
                         target.setLastHurtByPlayer(player);
                     } else {
@@ -59,6 +57,6 @@ public class ComponentRose extends ComponentBase {
     }
 
     public static DamageSource spellAttack(LivingEntity attacker) {
-        return new EntityDamageSource(Const.MODID + ".cactus", attacker);
+        return attacker.damageSources().source(RootsDamageTypes.CACTUS, attacker);
     }
 }

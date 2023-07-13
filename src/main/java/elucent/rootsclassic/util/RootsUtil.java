@@ -33,25 +33,25 @@ public class RootsUtil {
             x += livingEntity.getLookAngle().x * 0.1;
             y += livingEntity.getLookAngle().y * 0.1;
             z += livingEntity.getLookAngle().z * 0.1;
-            if (levelAccessor.getBlockState(new BlockPos(x, y, z)).getBlock() != Blocks.AIR) {
-                return new BlockPos(x, y, z);
+            if (levelAccessor.getBlockState(BlockPos.containing(x, y, z)).getBlock() != Blocks.AIR) {
+                return BlockPos.containing(x, y, z);
             }
         }
-        return new BlockPos(x, y, z);
+        return BlockPos.containing(x, y, z);
     }
 
     public static void addTickTracking(Entity entity) {
-        if (entity.getExtraCustomData().contains(Const.NBT_TRACK_TICKS)) {
-            entity.getExtraCustomData().putInt(Const.NBT_TRACK_TICKS, entity.getExtraCustomData().getInt(Const.NBT_TRACK_TICKS) + 1);
+        if (entity.getCustomData().contains(Const.NBT_TRACK_TICKS)) {
+            entity.getCustomData().putInt(Const.NBT_TRACK_TICKS, entity.getCustomData().getInt(Const.NBT_TRACK_TICKS) + 1);
         } else {
-            entity.getExtraCustomData().putInt(Const.NBT_TRACK_TICKS, 1);
+            entity.getCustomData().putInt(Const.NBT_TRACK_TICKS, 1);
         }
     }
 
     public static void decrementTickTracking(Entity entity) {
-        if (entity.getExtraCustomData().contains(Const.NBT_TRACK_TICKS)) {
-            entity.getExtraCustomData().putInt(Const.NBT_TRACK_TICKS, entity.getExtraCustomData().getInt(Const.NBT_TRACK_TICKS) - 1);
-            if (entity.getExtraCustomData().getInt(Const.NBT_TRACK_TICKS) == 0) {
+        if (entity.getCustomData().contains(Const.NBT_TRACK_TICKS)) {
+            entity.getCustomData().putInt(Const.NBT_TRACK_TICKS, entity.getCustomData().getInt(Const.NBT_TRACK_TICKS) - 1);
+            if (entity.getCustomData().getInt(Const.NBT_TRACK_TICKS) == 0) {
                 entity.removeTag(Const.NBT_TRACK_TICKS);
             }
         }
@@ -101,7 +101,7 @@ public class RootsUtil {
             for (ItemStack itemStack : available) {
                 boolean endIteration = false;
                 for (int i = 0; i < recipe.size() && !endIteration; i++) {
-                    if (itemStack.sameItem(recipe.get(i))) {
+                    if (ItemStack.isSameItem(itemStack, recipe.get(i))) {
                         recipe.remove(i);
                         endIteration = true;
                     }
@@ -133,7 +133,7 @@ public class RootsUtil {
             for (ItemStack itemStack : available) {
                 boolean endIteration = false;
                 for (int i = 0; i < recipe.size() && !endIteration; i++) {
-                    if (itemStack.sameItem(recipe.get(i))) {
+                    if (ItemStack.isSameItem(itemStack, recipe.get(i))) {
                         recipe.remove(i);
                         endIteration = true;
                     }
@@ -220,7 +220,7 @@ public class RootsUtil {
             for (ItemStack itemStack : available) {
                 boolean endIteration = false;
                 for (int i = 0; i < recipe.size() && !endIteration; i++) {
-                    if (itemStack.sameItem(recipe.get(i))) {
+                    if (ItemStack.isSameItem(itemStack, recipe.get(i))) {
                         recipe.remove(i);
                         endIteration = true;
                     }
@@ -249,7 +249,7 @@ public class RootsUtil {
             for (ItemStack itemStack : available) {
                 boolean endIteration = false;
                 for (int i = 0; i < recipe.size() && !endIteration; i++) {
-                    if (itemStack.sameItem(recipe.get(i))) {
+                    if (ItemStack.isSameItem(itemStack, recipe.get(i))) {
                         recipe.remove(i);
                         endIteration = true;
                     }
@@ -278,7 +278,7 @@ public class RootsUtil {
             for (Ingredient ingredient : available) {
                 boolean endIteration = false;
                 for (int i = 0; i < recipe.size() && !endIteration; i++) {
-                    if (ingredient.getItems()[0].sameItem(recipe.get(i).getItems()[0])) {
+                    if (ItemStack.isSameItem(ingredient.getItems()[0], recipe.get(i).getItems()[0])) {
                         recipe.remove(i);
                         endIteration = true;
                     }

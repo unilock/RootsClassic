@@ -4,7 +4,8 @@ import elucent.rootsclassic.Const;
 import elucent.rootsclassic.capability.RootsCapabilityManager;
 import elucent.rootsclassic.registry.RootsRegistry;
 import elucent.rootsclassic.util.RootsUtil;
-import io.github.fabricators_of_create.porting_lib.event.common.LivingEntityEvents;
+import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingEntityDamageEvents;
+import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingEntityEvents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -47,7 +48,7 @@ public class ComponentSpellsEvent {
                 legs.getItem() == RootsRegistry.WILDWOOD_LEGGINGS.get() &&
                 feet.getItem() == RootsRegistry.WILDWOOD_BOOTS.get()) {
             //
-            if (entity.level.random.nextDouble() < 0.02 && entity.getHealth() < entity.getMaxHealth()) {
+            if (entity.level().random.nextDouble() < 0.02 && entity.getHealth() < entity.getMaxHealth()) {
                 entity.heal(1);//1 half heart
             }
         }
@@ -77,14 +78,17 @@ public class ComponentSpellsEvent {
      */
 
     private static void onLivingDamage() {
-        LivingEntityEvents.ACTUALLY_HURT.register((damageSource, entityLiving, v) -> {
-            CompoundTag persistentData = entityLiving.getExtraCustomData();
+        LivingEntityDamageEvents.HURT.register((event) -> {
+            LivingEntity entityLiving = event.damaged;
+            DamageSource damageSource = event.damageSource;
+
+            CompoundTag persistentData = entityLiving.getCustomData();
             if (persistentData.contains(Const.NBT_VULN)) {
-                v = (float) (v * (1.0 + persistentData.getDouble(Const.NBT_VULN)));
+                event.damageAmount = (float) (event.damageAmount * (1.0 + persistentData.getDouble(Const.NBT_VULN)));
                 persistentData.remove(Const.NBT_VULN);
             }
-            if (persistentData.contains(Const.NBT_THORNS) && damageSource.getEntity() instanceof LivingEntity) {
-                ((LivingEntity) damageSource.getEntity()).hurt(DamageSource.CACTUS, persistentData.getFloat(Const.NBT_THORNS));
+            if (persistentData.contains(Const.NBT_THORNS) && event.damageSource.getEntity() instanceof LivingEntity) {
+                ((LivingEntity) damageSource.getEntity()).hurt(entityLiving.damageSources().cactus(), persistentData.getFloat(Const.NBT_THORNS));
                 persistentData.remove(Const.NBT_THORNS);
                 RootsUtil.decrementTickTracking(entityLiving);
             }
@@ -95,7 +99,7 @@ public class ComponentSpellsEvent {
                         int stepLvl = sword.getTag().getInt("shadowstep");
                         double chance = stepLvl * 12.5;
                         if (player.getCommandSenderWorld().random.nextInt(100) < chance) {
-                            return v;
+                            event.setCancelled(true);
                         }
                     }
                 }
@@ -110,25 +114,24 @@ public class ComponentSpellsEvent {
                             if (tag.contains("aquatic")) {
                                 int aquaLvl = tag.getInt("aquatic");
                                 float amount = aquaLvl * 0.5f;
-                                entityLiving.hurt(DamageSource.DROWN, amount);
+                                entityLiving.hurt(entityLiving.damageSources().drown(), amount);
                             }
                             if ((tag.contains("holy")) && entityLiving.getMobType() == MobType.UNDEAD) {
                                 int holyLvl = tag.getInt("holy");
                                 float amount = holyLvl * 1.5f;
-                                float currentAmount = v;
-                                v = (currentAmount + amount);
+                                float currentAmount = event.damageAmount;
+                                event.damageAmount = (currentAmount + amount);
                             }
                             if (tag.contains("spikes")) {
                                 int spikeLvl = tag.getInt("spikes");
                                 float amount = spikeLvl;
-                                float currentAmount = v;
-                                v = (currentAmount + amount);
+                                float currentAmount = event.damageAmount;
+                                event.damageAmount = (currentAmount + amount);
                             }
                         }
                     }
                 }
             }
-            return v;
         });
     }
 }

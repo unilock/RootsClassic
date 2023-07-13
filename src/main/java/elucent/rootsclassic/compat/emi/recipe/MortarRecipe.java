@@ -8,7 +8,9 @@ import dev.emi.emi.api.widget.WidgetHolder;
 import elucent.rootsclassic.Const;
 import elucent.rootsclassic.compat.emi.EMIPlugin;
 import elucent.rootsclassic.recipe.ComponentRecipe;
+import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.SimpleContainer;
 
 import java.util.List;
 
@@ -25,7 +27,7 @@ public class MortarRecipe implements EmiRecipe {
 		this.recipe = recipe;
 		this.id = recipe.getId();
 		this.input = recipe.getIngredients().stream().map(EmiIngredient::of).toList();
-		this.output = List.of(EmiStack.of(recipe.getResultItem()));
+		this.output = List.of(EmiStack.of(recipe.getResultItem(Minecraft.getInstance().player.clientLevel.registryAccess())));
 	}
 	
 	@Override
@@ -67,6 +69,6 @@ public class MortarRecipe implements EmiRecipe {
 			widgets.addSlot(ingredient, 2 + (i * 16), 25).drawBack(false);
 		}
 		
-		widgets.addSlot(EmiStack.of(recipe.assemble(null)), 122, 25).drawBack(false).recipeContext(this);
+		widgets.addSlot(EmiStack.of(recipe.assemble(new SimpleContainer(), Minecraft.getInstance().level.registryAccess())), 122, 25).drawBack(false).recipeContext(this);
 	}
 }

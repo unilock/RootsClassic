@@ -34,7 +34,7 @@ public class ManaBarEvent {
                 return false;
             }
             if(capability.getMaxMana() > 0) {
-                drawManaBar(player, capability, poseStack, window);
+                drawManaBar(player, capability, poseStack.pose(), window);
             }
             return false;
         });

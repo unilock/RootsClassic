@@ -10,7 +10,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ComponentMidnightBloom extends ComponentBase {
@@ -26,7 +25,7 @@ public class ComponentMidnightBloom extends ComponentBase {
                     new AABB(x - size * 6.0, y - size * 6.0, z - size * 6.0, x + size * 6.0, y + size * 6.0, z + size * 6.0));
             targets.removeIf(target -> target.getUUID() == caster.getUUID());
             for (LivingEntity target : targets) {
-                CompoundTag persistentData = target.getExtraCustomData();
+                CompoundTag persistentData = target.getCustomData();
                 persistentData.putBoolean(Const.NBT_TRACK_TICKS, false);
                 persistentData.putInt(Const.NBT_SKIP_TICKS, 40 + 40 * (int) potency);
             }

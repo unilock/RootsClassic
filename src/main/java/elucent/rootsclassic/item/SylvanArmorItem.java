@@ -15,7 +15,7 @@ import java.util.List;
 
 public class SylvanArmorItem extends ArmorItem implements ArmorTickListeningItem {
 
-    public SylvanArmorItem(ArmorMaterial materialIn, EquipmentSlot slot, Item.Properties builderIn) {
+    public SylvanArmorItem(ArmorMaterial materialIn, ArmorItem.Type slot, Item.Properties builderIn) {
         super(materialIn, slot, builderIn);
     }
 

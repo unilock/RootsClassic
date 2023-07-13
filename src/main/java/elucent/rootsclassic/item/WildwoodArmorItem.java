@@ -14,7 +14,7 @@ import java.util.List;
 
 public class WildwoodArmorItem extends ArmorItem implements ArmorTickListeningItem {
 
-    public WildwoodArmorItem(ArmorMaterial materialIn, EquipmentSlot slot, Item.Properties builderIn) {
+    public WildwoodArmorItem(ArmorMaterial materialIn, ArmorItem.Type slot, Item.Properties builderIn) {
         super(materialIn, slot, builderIn);
     }
 

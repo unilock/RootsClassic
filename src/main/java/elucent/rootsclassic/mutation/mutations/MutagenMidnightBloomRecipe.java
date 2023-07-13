@@ -22,7 +22,7 @@ public class MutagenMidnightBloomRecipe extends MutagenRecipe {
 
     @Override
     public void onCrafted(Level levelAccessor, BlockPos pos, Player player) {
-        player.getExtraCustomData().putInt(Const.NBT_SKIP_TICKS, 200);
+        player.getCustomData().putInt(Const.NBT_SKIP_TICKS, 200);
     }
 
     @Override

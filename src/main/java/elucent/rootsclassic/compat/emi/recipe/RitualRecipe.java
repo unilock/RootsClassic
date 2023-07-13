@@ -1,5 +1,6 @@
 package elucent.rootsclassic.compat.emi.recipe;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import dev.emi.emi.api.recipe.EmiRecipe;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import dev.emi.emi.api.stack.EmiIngredient;
@@ -81,16 +82,17 @@ public class RitualRecipe implements EmiRecipe {
 		widgets.addTexture(ALTAR_LOCATION, 0, 24, 94, 22, 49, 85); // incense background
 		widgets.addTexture(ALTAR_LOCATION, 64, 64, 22, 22, 61, 53); // result background
 		
-		widgets.addDrawable(0, 0, 93, 93, (stack, mx, my, delta) -> {
+		widgets.addDrawable(0, 0, 93, 93, (graphics, mx, my, delta) -> {
+			PoseStack stack = graphics.pose();
 			stack.pushPose();
 			stack.scale(0.5f, 0.5f, 1f);
 			
-			new TextureWidget(ALTAR_LOCATION, 20, 100, 93, 93, 50, 118).render(stack, mx, my, delta); // grid
+			new TextureWidget(ALTAR_LOCATION, 20, 100, 93, 93, 50, 118).render(graphics, mx, my, delta); // grid
 			
 			final int basePosX = 63;
 			final int basePosY = 135;
 			
-			new TextureWidget(ALTAR_LOCATION, basePosX, basePosY, 16, 16, 192, 32).render(stack, mx, my, delta); // stone
+			new TextureWidget(ALTAR_LOCATION, basePosX, basePosY, 16, 16, 192, 32).render(graphics, mx, my, delta); // stone
 			
 			final List<Block> blocks = ritual.getBlocks();
 			final List<BlockPos> relativePosition = ritual.getPositionsRelative();
@@ -101,12 +103,12 @@ public class RitualRecipe implements EmiRecipe {
 				if (block.equals(RootsRegistry.MUNDANE_STANDING_STONE.get())) {
 					xShift = 8 * pos.getX();
 					yShift = 8 * pos.getZ();
-					new TextureWidget(ALTAR_LOCATION, basePosX + xShift, basePosY + yShift, 16, 16, 192, 48).render(stack, mx, my, delta); // mundane stone
+					new TextureWidget(ALTAR_LOCATION, basePosX + xShift, basePosY + yShift, 16, 16, 192, 48).render(graphics, mx, my, delta); // mundane stone
 				}
 				if (block.equals(RootsRegistry.ATTUNED_STANDING_STONE.get())) {
 					xShift = 8 * pos.getX();
 					yShift = 8 * pos.getZ();
-					new TextureWidget(ALTAR_LOCATION, basePosX + xShift, basePosY + yShift, 16, 16, 192, 64).render(stack, mx, my, delta); // attuned stone
+					new TextureWidget(ALTAR_LOCATION, basePosX + xShift, basePosY + yShift, 16, 16, 192, 64).render(graphics, mx, my, delta); // attuned stone
 				}
 			}
 			

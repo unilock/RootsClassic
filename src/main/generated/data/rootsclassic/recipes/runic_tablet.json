@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "key": {
     "B": {
       "tag": "c:stone"
@@ -18,5 +19,6 @@
   ],
   "result": {
     "item": "rootsclassic:runic_tablet"
-  }
+  },
+  "show_notification": true
 }

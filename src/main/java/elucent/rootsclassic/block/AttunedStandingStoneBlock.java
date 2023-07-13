@@ -92,11 +92,6 @@ public class AttunedStandingStoneBlock extends BaseBEBlock {
     }
 
     @Override
-    public PushReaction getPistonPushReaction(BlockState state) {
-        return PushReaction.DESTROY;
-    }
-
-    @Override
     public VoxelShape getShape(BlockState state, BlockGetter levelAccessor, BlockPos pos, CollisionContext context) {
         if (state.getValue(HALF) == DoubleBlockHalf.LOWER) {
             return BOTTOM_SHAPE;

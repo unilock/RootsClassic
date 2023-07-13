@@ -2,7 +2,7 @@ package elucent.rootsclassic.config;
 
 import elucent.rootsclassic.Const;
 import elucent.rootsclassic.Roots;
-import net.minecraftforge.api.fml.event.config.ModConfigEvents;
+import fuzs.forgeconfigapiport.api.config.v2.ModConfigEvents;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.BooleanValue;
 import net.minecraftforge.common.ForgeConfigSpec.DoubleValue;

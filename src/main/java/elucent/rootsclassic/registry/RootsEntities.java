@@ -7,7 +7,7 @@ import elucent.rootsclassic.entity.skeleton.PhantomSkeletonEntity;
 import io.github.fabricators_of_create.porting_lib.util.LazyRegistrar;
 import io.github.fabricators_of_create.porting_lib.util.RegistryObject;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -16,7 +16,7 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.levelgen.Heightmap;
 
 public class RootsEntities {
-    public static final LazyRegistrar<EntityType<?>> ENTITY_TYPES = LazyRegistrar.create(Registry.ENTITY_TYPE, Const.MODID);
+    public static final LazyRegistrar<EntityType<?>> ENTITY_TYPES = LazyRegistrar.create(BuiltInRegistries.ENTITY_TYPE, Const.MODID);
     public static final RegistryObject<EntityType<PhantomSkeletonEntity>> PHANTOM_SKELETON = ENTITY_TYPES.register("phantom_skeleton", () -> register("phantom_skeleton", EntityType.Builder.<PhantomSkeletonEntity>of(PhantomSkeletonEntity::new, MobCategory.MONSTER)
             .sized(0.6F, 1.99F).clientTrackingRange(6)));
     public static final RegistryObject<EntityType<EntityAccelerator>> ENTITY_ACCELERATOR = ENTITY_TYPES.register("entity_accelerator", () -> register("entity_accelerator", EntityType.Builder.<EntityAccelerator>of(EntityAccelerator::new, MobCategory.MISC)

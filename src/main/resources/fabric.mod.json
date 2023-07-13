@@ -12,9 +12,9 @@
     "ZestyBlaze"
   ],
   "contact": {
-    "homepage": "",
-    "sources": "",
-    "issues": ""
+    "homepage": "https://legacy.curseforge.com/minecraft/mc-mods/roots-classic-fabric",
+    "sources": "https://github.com/ZestyBlaze/RootsClassic",
+    "issues": "https://github.com/ZestyBlaze/RootsClassic/issues"
   },
 
   "license": "MIT",
@@ -45,7 +45,7 @@
   "depends": {
     "fabricloader": ">=0.14.11",
     "fabric-api": "*",
-    "minecraft": "~1.19.2",
+    "minecraft": "~1.20.1",
     "java": ">=17"
   },
   "mixins": [
