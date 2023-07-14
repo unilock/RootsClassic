@@ -15,11 +15,12 @@ repositories {
 	maven { url "https://maven.parchmentmc.org" }
 	maven { url "https://mvn.devos.one/snapshots/" }
 	maven { url "https://jitpack.io" }
-	maven { url "https://ladysnake.jfrog.io/artifactory/mods" }
+	maven { url "https://maven.ladysnake.org/releases" }
 	maven { url "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/" }
 	maven { url "https://maven.blamejared.com/" }
 	maven { url "https://modmaven.dev" }
 	maven { url "https://maven.terraformersmc.com/" }
+	maven { url "https://maven.shedaniel.me" }
 }
 
 dependencies {
@@ -36,9 +37,12 @@ dependencies {
 	modImplementation "net.minecraftforge:forgeconfigapiport-fabric:${project.configapi_version}"
 	implementation("com.electronwill.night-config:core:${project.nightconfig_version}")
 	implementation("com.electronwill.night-config:toml:${project.nightconfig_version}")
+	modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:${project.rei_version}")
+	modCompileOnly("me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:${project.rei_version}")
+//	modImplementation("me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}") // comment to disable REI
 	modCompileOnlyApi("mezz.jei:jei-${project.minecraft_version}-common-api:${project.jei_version}")
 	modCompileOnlyApi("mezz.jei:jei-${project.minecraft_version}-fabric-api:${project.jei_version}")
-	//modRuntimeOnly("mezz.jei:jei-${project.minecraft_version}-fabric:${project.jei_version}") // comment to disable JEI
+//	modRuntimeOnly("mezz.jei:jei-${project.minecraft_version}-fabric:${project.jei_version}") // comment to disable JEI
 	modCompileOnly("dev.emi:emi-fabric:${project.emi_version}:api")
 	//modLocalRuntime("dev.emi:emi-fabric:${project.emi_version}") // comment to disable EMI
 }
@@ -66,7 +70,7 @@ jar {
 }
 
 loom {
-	accessWidenerPath = file("src/main/resources/rootsclassic.accesswidener")
+	accessWidenerPath = file("src/main/resources/rootsclassic.accessWidener")
 
 	runs {
 		//
