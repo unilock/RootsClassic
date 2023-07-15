@@ -194,14 +194,14 @@ public class MortarBlockEntity extends BEBase {
     }
 
     private void dropAllItems(Level levelAccessor, BlockPos pos) {
-        for (int i = 0; i < inventory.getSlots(); i++) {
+        for (int i = 0; i < inventory.getSlots().size(); i++) {
             ItemStack stack = inventory.getStackInSlot(i);
             dropItem(stack, 0F);
         }
     }
 
     private void calculateRotations() {
-        for (int i = 0; i < inventory.getSlots(); i++) {
+        for (int i = 0; i < inventory.getSlots().size(); i++) {
             ItemStack stack = inventory.getStackInSlot(i);
             if (!stack.isEmpty()) {
             }

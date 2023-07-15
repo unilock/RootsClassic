@@ -21,10 +21,10 @@ public class AltarBER implements BlockEntityRenderer<AltarBlockEntity> {
     @Override
     public void render(AltarBlockEntity altarTile, float partialTicks, PoseStack matrixStackIn, MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
         List<ItemStack> renderItems = new ArrayList<>();
-        for (int i = 0; i < altarTile.inventory.getSlots(); i++) {
+        for (int i = 0; i < altarTile.inventory.getSlots().size(); i++) {
             renderItems.add(altarTile.inventory.getStackInSlot(i));
         }
-        for (int i = 0; i < altarTile.inventory.getSlots(); i++) {
+        for (int i = 0; i < altarTile.inventory.getSlots().size(); i++) {
             matrixStackIn.pushPose();
             double shifted = altarTile.getTicker() + i * (360.0 / renderItems.size());
             matrixStackIn.translate(0.5, 1.0 + 0.1 * Math.sin(Math.toRadians((shifted * 4.0))), 0.5);

@@ -99,7 +99,7 @@ public class AltarBlockEntity extends BEBase {
 
     @Override
     public void breakBlock(Level levelAccessor, BlockPos pos, BlockState state, Player player) {
-        for (int i = 0; i < inventory.getSlots(); i++) {
+        for (int i = 0; i < inventory.getSlots().size(); i++) {
             if (!levelAccessor.isClientSide) {
                 ItemStack slotStack = inventory.getStackInSlot(i);
                 if (!slotStack.isEmpty()) {
@@ -115,7 +115,7 @@ public class AltarBlockEntity extends BEBase {
         if (hand == InteractionHand.MAIN_HAND) {
             if (heldItem.isEmpty() && !player.isShiftKeyDown() && this.getProgress() == 0) {
                 //try to withdraw an item
-                if (inventory.getSlots() > 0) {
+                if (inventory.getSlots().size() > 0) {
                     ItemStack lastStack = InventoryUtil.getLastStack(inventory);
                     if (!lastStack.isEmpty()) {
                         if (!levelAccessor.isClientSide) {
@@ -340,7 +340,7 @@ public class AltarBlockEntity extends BEBase {
     }
 
     public void emptyAltar() {
-        for (int i = 0; i < inventory.getSlots(); i++) {
+        for (int i = 0; i < inventory.getSlots().size(); i++) {
             inventory.setStackInSlot(i, ItemStack.EMPTY);
         }
     }

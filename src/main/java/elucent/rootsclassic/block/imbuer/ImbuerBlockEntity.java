@@ -39,7 +39,7 @@ public class ImbuerBlockEntity extends BEBase {
         }
 
         @Override
-        public boolean isItemValid(int slot, @NotNull ItemVariant stack, long amount) {
+        public boolean isItemValid(int slot, ItemVariant stack) {
             if (slot == 0) {
                 return stack.toStack().is(Tags.Items.RODS_WOODEN);
             } else {
@@ -79,7 +79,7 @@ public class ImbuerBlockEntity extends BEBase {
 
     @Override
     public void breakBlock(Level levelAccessor, BlockPos pos, BlockState state, Player player) {
-        for (int i = 0; i < inventory.getSlots(); i++) {
+        for (int i = 0; i < inventory.getSlots().size(); i++) {
             ItemStack stack = inventory.getStackInSlot(i);
             if (!stack.isEmpty() && !levelAccessor.isClientSide) {
                 levelAccessor.addFreshEntity(new ItemEntity(levelAccessor, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, stack));

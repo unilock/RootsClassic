@@ -93,8 +93,9 @@ public class RootsDataGen implements DataGeneratorEntrypoint {
     }
 
     private static class GLMProvider extends GlobalLootModifierProvider {
-        public GLMProvider(FabricDataOutput output) {
-            super(output, Const.MODID);
+
+        public GLMProvider(FabricDataOutput packOutput) {
+            super(packOutput, Const.MODID);
         }
 
         @Override
@@ -102,8 +103,7 @@ public class RootsDataGen implements DataGeneratorEntrypoint {
             add("rootsclassic_drops", new DropModifier.BlockDropModifier(
                     new LootItemCondition[]{
                             InvertedLootItemCondition.invert(MatchTool.toolMatches(ItemPredicate.Builder.item().of(Tags.Items.SHEARS))).build()
-                    }
-            ));
+                    }));
         }
     }
 

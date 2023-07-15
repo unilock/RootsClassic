@@ -469,7 +469,7 @@ public class RitualRegistry {
             //        Roots.logger.info("----");
             //      }
             List<ItemStack> altarInv = new ArrayList<>();
-            for (int i = 0; i < altar.inventory.getSlots(); i++) {
+            for (int i = 0; i < altar.inventory.getSlots().size(); i++) {
                 altarInv.add(altar.inventory.getStackInSlot(i));
             }
             if (RootsUtil.itemListsMatchWithSize(ritual.getIngredients(), altarInv)) {

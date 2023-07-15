@@ -6,7 +6,7 @@ import net.minecraft.world.item.ItemStack;
 public class InventoryUtil {
     public static int getFirstEmptyStack(ItemStackHandler itemHandler) {
         if (itemHandler == null) return -1;
-        for (int i = 0; i < itemHandler.getSlots(); i++) {
+        for (int i = 0; i < itemHandler.getSlots().size(); i++) {
             if (itemHandler.getStackInSlot(i).isEmpty()) {
                 return i;
             }
@@ -16,7 +16,7 @@ public class InventoryUtil {
 
     public static boolean isFull(ItemStackHandler itemHandler) {
         if (itemHandler == null) return true;
-        for (int i = 0; i < itemHandler.getSlots(); i++) {
+        for (int i = 0; i < itemHandler.getSlots().size(); i++) {
             ItemStack stack = itemHandler.getStackInSlot(i);
             if (stack.isEmpty() || (stack.getCount() < stack.getMaxStackSize())) {
                 return false;
@@ -27,7 +27,7 @@ public class InventoryUtil {
 
     public static boolean isEmpty(ItemStackHandler itemHandler) {
         if (itemHandler == null) return true;
-        for (int i = 0; i < itemHandler.getSlots(); i++) {
+        for (int i = 0; i < itemHandler.getSlots().size(); i++) {
             ItemStack stack = itemHandler.getStackInSlot(i);
             if (!stack.isEmpty()) {
                 return false;
@@ -38,7 +38,7 @@ public class InventoryUtil {
 
     public static void clearInventory(ItemStackHandler itemHandler) {
         if (itemHandler == null) return;
-        for (int i = 0; i < itemHandler.getSlots(); i++) {
+        for (int i = 0; i < itemHandler.getSlots().size(); i++) {
             ItemStack stack = itemHandler.getStackInSlot(i);
             if (!stack.isEmpty()) {
                 stack.shrink(1);
@@ -48,7 +48,7 @@ public class InventoryUtil {
 
     public static ItemStack getLastStack(ItemStackHandler itemHandler) {
         if (itemHandler == null) return ItemStack.EMPTY;
-        for (int i = itemHandler.getSlots() - 1; i >= 0; i--) {
+        for (int i = itemHandler.getSlots().size() - 1; i >= 0; i--) {
             ItemStack stack = itemHandler.getStackInSlot(i);
             if (!stack.isEmpty()) {
                 return stack;
@@ -59,8 +59,8 @@ public class InventoryUtil {
 
     public static CustomInventory createIInventory(ItemStackHandler itemHandler) {
         if (itemHandler == null) return null;
-        CustomInventory inventory = new CustomInventory(itemHandler.getSlots());
-        for (int i = 0; i < itemHandler.getSlots(); i++) {
+        CustomInventory inventory = new CustomInventory(itemHandler.getSlots().size());
+        for (int i = 0; i < itemHandler.getSlots().size(); i++) {
             inventory.setItem(i, itemHandler.getStackInSlot(i));
         }
         return inventory;

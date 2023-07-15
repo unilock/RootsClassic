@@ -21,7 +21,7 @@ public class MortarBER implements BlockEntityRenderer<MortarBlockEntity> {
     @Override
     public void render(MortarBlockEntity mortarTile, float partialTicks, PoseStack matrixStackIn, MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
         final ItemStackHandler inventory = mortarTile.inventory;
-        for (int i = 0; i < inventory.getSlots(); i++) {
+        for (int i = 0; i < inventory.getSlots().size(); i++) {
             ItemStack stack = inventory.getStackInSlot(i);
             if (!stack.isEmpty()) {
                 matrixStackIn.pushPose();
