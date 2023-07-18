@@ -6,19 +6,22 @@ import elucent.rootsclassic.config.RootsConfig;
 import elucent.rootsclassic.event.ComponentSpellsEvent;
 import elucent.rootsclassic.lootmodifiers.DropModifier;
 import elucent.rootsclassic.recipe.RootsReloadManager;
-import elucent.rootsclassic.registry.ParticleRegistry;
-import elucent.rootsclassic.registry.RootsEntities;
-import elucent.rootsclassic.registry.RootsRecipes;
-import elucent.rootsclassic.registry.RootsRegistry;
+import elucent.rootsclassic.registry.*;
 import elucent.rootsclassic.ritual.RitualRegistry;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.ModLoadingContext;
 import net.minecraftforge.fml.config.ModConfig;
 import org.slf4j.Logger;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class Roots implements ModInitializer {
 

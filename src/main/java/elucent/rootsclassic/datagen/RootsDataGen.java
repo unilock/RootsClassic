@@ -83,7 +83,7 @@ public class RootsDataGen implements DataGeneratorEntrypoint {
     }
 
     private static class GLMProvider extends GlobalLootModifierProvider {
-        public GLMProvider(DataGenerator gen) {
+        public GLMProvider(FabricDataGenerator gen) {
             super(gen, Const.MODID);
         }
 

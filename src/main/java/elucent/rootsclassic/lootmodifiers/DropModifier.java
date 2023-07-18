@@ -31,6 +31,7 @@ import java.util.Random;
 import java.util.function.Supplier;
 
 public class DropModifier {
+
     public static final LazyRegistrar<Codec<? extends IGlobalLootModifier>> GLM = LazyRegistrar.create(PortingLibRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, Const.MODID);
     public static final RegistryObject<Codec<? extends IGlobalLootModifier>> ROOTSCLASSIC_DROPS = GLM.register("rootsclassic_drops", BlockDropModifier.CODEC);
 
@@ -76,10 +77,8 @@ public class DropModifier {
                 if (block instanceof LeavesBlock) {
                     if (!generatedLoot.stream().anyMatch((stack) -> stack.getItem() instanceof BlockItem && ((BlockItem) stack.getItem()).getBlock() == block)) {
                         if (RootsConfig.COMMON.berriesDropChance.get() > 0 && rand.nextInt(RootsConfig.COMMON.berriesDropChance.get()) == 0) {
-                            Item berry = RootsRegistry.ELDERBERRY.get();
-                            if(getRandomBerryTagEntry() != null) {
-                                berry = getRandomBerryTagEntry();
-                            }
+                            Item berry;
+                            berry = getRandomBerryTagEntry();
 
                             generatedLoot.add(new ItemStack(berry));
                         }
