@@ -8,9 +8,9 @@ import elucent.rootsclassic.component.ComponentBaseRegistry;
 import elucent.rootsclassic.item.StaffItem;
 import elucent.rootsclassic.item.powder.SpellPowderItem;
 import elucent.rootsclassic.registry.RootsRegistry;
+import io.github.fabricators_of_create.porting_lib.tags.Tags;
 import io.github.fabricators_of_create.porting_lib.transfer.item.ItemStackHandler;
 import io.github.fabricators_of_create.porting_lib.util.LazyOptional;
-import me.alphamode.forgetags.Tags;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -242,11 +242,5 @@ public class ImbuerBlockEntity extends BEBase {
                 tile.progress = 0;
             }
         }
-    }
-
-    @Override
-    public void invalidateCaps() {
-        super.invalidateCaps();
-        inventoryHolder.invalidate();
     }
 }

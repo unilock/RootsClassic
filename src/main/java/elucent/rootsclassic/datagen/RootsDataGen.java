@@ -7,7 +7,7 @@ import elucent.rootsclassic.registry.RootsRegistry;
 import elucent.rootsclassic.registry.RootsTags;
 import io.github.fabricators_of_create.porting_lib.data.DatapackBuiltinEntriesProvider;
 import io.github.fabricators_of_create.porting_lib.loot.GlobalLootModifierProvider;
-import me.alphamode.forgetags.Tags;
+import io.github.fabricators_of_create.porting_lib.tags.Tags;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;

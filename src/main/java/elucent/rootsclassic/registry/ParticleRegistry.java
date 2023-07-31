@@ -5,7 +5,6 @@ import elucent.rootsclassic.client.particles.factory.MagicParticleType;
 import elucent.rootsclassic.client.particles.factory.MagicParticleTypeData;
 import io.github.fabricators_of_create.porting_lib.util.LazyRegistrar;
 import io.github.fabricators_of_create.porting_lib.util.RegistryObject;
-import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
 

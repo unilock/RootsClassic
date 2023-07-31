@@ -1,6 +1,5 @@
 package elucent.rootsclassic.compat.rei.category;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import elucent.rootsclassic.Const;
 import elucent.rootsclassic.compat.rei.REIPlugin;

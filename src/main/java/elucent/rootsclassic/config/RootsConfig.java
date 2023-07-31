@@ -1,8 +1,5 @@
 package elucent.rootsclassic.config;
 
-import elucent.rootsclassic.Const;
-import elucent.rootsclassic.Roots;
-import fuzs.forgeconfigapiport.api.config.v2.ModConfigEvents;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.BooleanValue;
 import net.minecraftforge.common.ForgeConfigSpec.DoubleValue;
@@ -107,22 +104,5 @@ public class RootsConfig {
         final Pair<Common, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(Common::new);
         commonSpec = specPair.getRight();
         COMMON = specPair.getLeft();
-    }
-
-    public static void registerEvents() {
-        onLoad();
-        onFileChange();
-    }
-
-    private static void onLoad() {
-        ModConfigEvents.loading(Const.MODID).register(config -> {
-            Roots.LOGGER.debug("Loaded Roots Classic's config file {}", config.getFileName());
-        });
-    }
-
-    private static void onFileChange() {
-        ModConfigEvents.reloading(Const.MODID).register(config -> {
-            Roots.LOGGER.warn("Roots Classic's config just got changed on the file system!");
-        });
     }
 }

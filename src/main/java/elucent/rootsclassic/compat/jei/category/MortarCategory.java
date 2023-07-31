@@ -1,6 +1,5 @@
 package elucent.rootsclassic.compat.jei.category;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import elucent.rootsclassic.Const;
 import elucent.rootsclassic.compat.jei.JEIPlugin;
 import elucent.rootsclassic.recipe.ComponentRecipe;

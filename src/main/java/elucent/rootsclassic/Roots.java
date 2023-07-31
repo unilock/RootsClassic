@@ -24,7 +24,6 @@ public class Roots implements ModInitializer {
 	public void onInitialize() {
 		ForgeConfigRegistry.INSTANCE.register(Const.MODID, ModConfig.Type.CLIENT, RootsConfig.clientSpec);
 		ForgeConfigRegistry.INSTANCE.register(Const.MODID, ModConfig.Type.COMMON, RootsConfig.commonSpec);
-		RootsConfig.registerEvents();
 		RootsRegistry.BLOCKS.register();
 		RootsRegistry.ITEMS.register();
 		RootsRegistry.BLOCK_ENTITY_TYPES.register();
