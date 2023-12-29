@@ -1,7 +1,7 @@
 package elucent.rootsclassic.entity.skeleton;
 
 import elucent.rootsclassic.registry.RootsEntities;
-import io.github.fabricators_of_create.porting_lib.fake_players.FakePlayer;
+import net.fabricmc.fabric.api.entity.FakePlayer;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;

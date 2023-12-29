@@ -4,10 +4,8 @@ import elucent.rootsclassic.Const;
 import elucent.rootsclassic.capability.RootsCapabilityManager;
 import elucent.rootsclassic.registry.RootsRegistry;
 import elucent.rootsclassic.util.RootsUtil;
-import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingEntityDamageEvents;
-import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingEntityEvents;
+import io.github.fabricators_of_create.porting_lib.entity.events.LivingEntityEvents;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobType;
@@ -78,60 +76,54 @@ public class ComponentSpellsEvent {
      */
 
     private static void onLivingDamage() {
-        LivingEntityDamageEvents.HURT.register((event) -> {
-            LivingEntity entityLiving = event.damaged;
-            DamageSource damageSource = event.damageSource;
-
-            CompoundTag persistentData = entityLiving.getCustomData();
+        LivingEntityEvents.HURT.register((source, damaged, amount) -> {
+            CompoundTag persistentData = damaged.getCustomData();
             if (persistentData.contains(Const.NBT_VULN)) {
-                event.damageAmount = (float) (event.damageAmount * (1.0 + persistentData.getDouble(Const.NBT_VULN)));
+                amount *= (float) (1.0 + persistentData.getDouble(Const.NBT_VULN));
                 persistentData.remove(Const.NBT_VULN);
             }
-            if (persistentData.contains(Const.NBT_THORNS) && event.damageSource.getEntity() instanceof LivingEntity) {
-                ((LivingEntity) damageSource.getEntity()).hurt(entityLiving.damageSources().cactus(), persistentData.getFloat(Const.NBT_THORNS));
+            if (persistentData.contains(Const.NBT_THORNS) && source.getEntity() instanceof LivingEntity) {
+                source.getEntity().hurt(damaged.damageSources().cactus(), persistentData.getFloat(Const.NBT_THORNS));
                 persistentData.remove(Const.NBT_THORNS);
-                RootsUtil.decrementTickTracking(entityLiving);
+                RootsUtil.decrementTickTracking(damaged);
             }
-            if (entityLiving instanceof Player player) {
+            if (damaged instanceof Player player) {
                 if (!player.getInventory().getSelected().isEmpty() && player.getInventory().getSelected().getItem() == RootsRegistry.ENGRAVED_BLADE.get()) {
                     ItemStack sword = player.getInventory().getSelected();
                     if (sword.hasTag() && sword.getTag().contains("shadowstep")) {
                         int stepLvl = sword.getTag().getInt("shadowstep");
                         double chance = stepLvl * 12.5;
                         if (player.getCommandSenderWorld().random.nextInt(100) < chance) {
-                            event.setCancelled(true);
+                            return 0;
                         }
                     }
                 }
             }
-            if (damageSource.getEntity() instanceof Player) {
-                if (!entityLiving.getCommandSenderWorld().isClientSide) {
-                    Player player = (Player) damageSource.getEntity();
+            if (source.getEntity() instanceof Player) {
+                if (!damaged.getCommandSenderWorld().isClientSide) {
+                    Player player = (Player) source.getEntity();
                     if (!player.getInventory().getSelected().isEmpty() && player.getInventory().getSelected().getItem() == RootsRegistry.ENGRAVED_BLADE.get()) {
                         ItemStack sword = player.getInventory().getSelected();
                         if (sword.hasTag()) {
                             CompoundTag tag = sword.getTag();
                             if (tag.contains("aquatic")) {
                                 int aquaLvl = tag.getInt("aquatic");
-                                float amount = aquaLvl * 0.5f;
-                                entityLiving.hurt(entityLiving.damageSources().drown(), amount);
+                                float amount2 = aquaLvl * 0.5f;
+                                damaged.hurt(damaged.damageSources().drown(), amount2);
                             }
-                            if ((tag.contains("holy")) && entityLiving.getMobType() == MobType.UNDEAD) {
+                            if ((tag.contains("holy")) && damaged.getMobType() == MobType.UNDEAD) {
                                 int holyLvl = tag.getInt("holy");
-                                float amount = holyLvl * 1.5f;
-                                float currentAmount = event.damageAmount;
-                                event.damageAmount = (currentAmount + amount);
+                                amount += holyLvl * 1.5f;
                             }
                             if (tag.contains("spikes")) {
                                 int spikeLvl = tag.getInt("spikes");
-                                float amount = spikeLvl;
-                                float currentAmount = event.damageAmount;
-                                event.damageAmount = (currentAmount + amount);
+                                amount += spikeLvl;
                             }
                         }
                     }
                 }
             }
+            return amount;
         });
     }
 }
