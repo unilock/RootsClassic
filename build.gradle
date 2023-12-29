@@ -1,51 +1,65 @@
 plugins {
-	id 'fabric-loom' version '1.3-SNAPSHOT'
+	id 'fabric-loom' version '1.4-SNAPSHOT'
 	id 'maven-publish'
 }
 
-sourceCompatibility = JavaVersion.VERSION_17
-targetCompatibility = JavaVersion.VERSION_17
-
-archivesBaseName = project.archives_base_name
 version = project.mod_version
 group = project.maven_group
 
+base {
+	archivesName = project.archives_base_name
+}
+
 repositories {
-	mavenCentral()
-	maven { url "https://maven.parchmentmc.org" }
-	maven { url "https://mvn.devos.one/snapshots/" }
-	maven { url "https://jitpack.io" }
-	maven { url "https://ladysnake.jfrog.io/artifactory/mods" }
-	maven { url "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/" }
 	maven { url "https://maven.blamejared.com/" }
-	maven { url "https://modmaven.dev" }
-	maven { url "https://maven.terraformersmc.com/" }
-	maven { url "https://maven.vram.io/" }
+	maven { url "https://maven.jamieswhiteshirt.com/libs-release/" }
+	maven { url "https://maven.ladysnake.org/releases/" }
+	maven { url "https://maven.parchmentmc.org/" }
 	maven { url "https://maven.shedaniel.me/" }
+	maven { url "https://maven.terraformersmc.com/" }
+	maven { url "https://mvn.devos.one/snapshots/" }
+	maven { url "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/" }
+	mavenCentral()
+	maven { url "https://jitpack.io" }
 }
 
 dependencies {
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
-	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
 	mappings loom.layered() {
 		officialMojangMappings()
 		parchment("org.parchmentmc.data:parchment-${project.parchment_version}@zip")
 	}
-	modImplementation(include("io.github.fabricators_of_create.Porting-Lib:Porting-Lib:${project.portinglib_version}"))
-	modImplementation(include("dev.onyxstudios.cardinal-components-api:cardinal-components-base:${project.cc_version}"))
-	modImplementation(include("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${project.cc_version}"))
+
+	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+	modImplementation include("io.github.fabricators_of_create.Porting-Lib:Porting-Lib:${project.portinglib_version}")
+
+	modImplementation include("dev.onyxstudios.cardinal-components-api:cardinal-components-base:${project.cca_version}")
+	modImplementation include("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${project.cca_version}")
+
 	modImplementation "fuzs.forgeconfigapiport:forgeconfigapiport-fabric:${project.configapi_version}"
-	implementation("com.electronwill.night-config:core:${project.nightconfig_version}")
-	implementation("com.electronwill.night-config:toml:${project.nightconfig_version}")
-	modCompileOnlyApi("mezz.jei:jei-${project.minecraft_version}-common-api:${project.jei_version}")
-	modCompileOnlyApi("mezz.jei:jei-${project.minecraft_version}-fabric-api:${project.jei_version}")
-	//modRuntimeOnly("mezz.jei:jei-${project.minecraft_version}-fabric:${project.jei_version}") // comment to disable JEI
-	modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:${project.rei_version}")
-	modCompileOnly("me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:${project.rei_version}")
-	modImplementation("me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}") // comment to disable REI
-	modCompileOnly("dev.emi:emi-fabric:${project.emi_version}:api")
-	//modLocalRuntime("dev.emi:emi-fabric:${project.emi_version}") // comment to disable EMI
+	implementation "com.electronwill.night-config:core:${project.nightconfig_version}"
+	implementation "com.electronwill.night-config:toml:${project.nightconfig_version}"
+
+	modCompileOnlyApi "mezz.jei:jei-${project.minecraft_version}-common-api:${project.jei_version}"
+	modCompileOnlyApi "mezz.jei:jei-${project.minecraft_version}-fabric-api:${project.jei_version}"
+
+	modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:${project.rei_version}"
+	modCompileOnly "me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:${project.rei_version}"
+
+	modCompileOnly "dev.emi:emi-fabric:${project.emi_version}:api"
+
+	if (project.recipe_viewer == "jei") {
+		modRuntimeOnly("mezz.jei:jei-${project.minecraft_version}-fabric:${project.jei_version}")
+	}
+	if (project.recipe_viewer == "rei") {
+		modImplementation("me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}")
+	}
+	if (project.recipe_viewer = "emi") {
+		modLocalRuntime("dev.emi:emi-fabric:${project.emi_version}")
+	}
 }
 
 processResources {
@@ -57,16 +71,20 @@ processResources {
 }
 
 tasks.withType(JavaCompile).configureEach {
+	it.options.encoding = "UTF-8"
 	it.options.release = 17
 }
 
 java {
 	withSourcesJar()
+
+	sourceCompatibility = JavaVersion.VERSION_17
+	targetCompatibility = JavaVersion.VERSION_17
 }
 
 jar {
 	from("LICENSE") {
-		rename { "${it}_${project.archivesBaseName}"}
+		rename { "${it}_${project.base.archivesName.get()}" }
 	}
 }
 
@@ -74,9 +92,6 @@ loom {
 	accessWidenerPath = file("src/main/resources/rootsclassic.accessWidener")
 
 	runs {
-		//
-		// This adds a new gradle task that runs the datagen API: "gradlew runDatagenClient"
-		//
 		datagenClient {
 			inherit client
 			name "Data Generation"
@@ -87,18 +102,25 @@ loom {
 			runDir "build/datagen"
 		}
 	}
+
+	mods {
+		"rootsclassic" {
+			sourceSet("main")
+		}
+	}
 }
 
 sourceSets {
 	main {
 		resources {
 			srcDirs += [
-					'src/main/generated'
+				'src/main/generated'
 			]
 		}
 	}
 }
 
+// Configure the maven publication
 publishing {
 	publications {
 		mavenJava(MavenPublication) {
@@ -106,6 +128,11 @@ publishing {
 		}
 	}
 
+	// See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
 	repositories {
+		// Add repositories to publish to here.
+		// Notice: This block does NOT have the same function as the block in the top level.
+		// The repositories here will be used for publishing your artifact, not for
+		// retrieving dependencies.
 	}
 }
